@@ -1,2 +1,64 @@
-5
-11 22 33 44 55
+//----------------------------------------------------Teste unitare-----------------------------------------------------
+     Rezervare R1(3,"20:30","14.03.2024","Terasa","Sephora");
+     Rezervare R2(4,"20:30","14.03.2024","Parter","Dominic");
+     cout<<R2<<endl; //operator pentru afisare
+     if (R2>"23:00"==0) //folosirea operatorului supraincarcat >
+        cout<<"Ora limita a fost depasita\n";
+     else
+        cout<<"Rezervarea poate fi facuta, ora limita nu a fost depasita\n";
+
+     if(R1==R2) //folosirea operatorului ==
+         cout<<"\nOra si data coincid";
+     else
+         cout<<"\nRezervarile nu coincid";
+     Rezervare R3; cin >> R3; cout<<endl; //operator pentru citire
+     Rezervare R4; cout<<R4; cout<<endl;  //constructor de initializare
+     Rezervare R5 (6, "18:30", "10.03.2024","Blanca"); //constructor supraincarcat
+     cout<<R5;
+
+//---------------------------------------------------Teste pentru meniul interactiv-------------------------------------------
+//Input functia Creare_Rezervare() care adauga o rezervare in sistem cu toate datele clientului
+1
+23.03.2024
+21:00
+23.03.2024
+20:00
+23.03.2024
+22:00
+4
+Parter
+Carmen
+
+//Input functia Modificare_Detalii_Rezervare()
+2
+19.03.2024
+25.03.2024
+Matei
+2
+22:00
+Da
+3
+11
+Da
+1
+24.03.2024
+Nu
+
+//Input functia OreDisponibile(), clientul introduce o data si se vor afisa toate orele disponibile din acea zi
+3
+25.03.2024
+Da
+21.03.2024
+Nu
+
+//Input functia Recomandari_Culinare(), clientul poate primi recomandari de mancare din 3 categorii, "Desert","Contine carne", "Fara carne"
+4
+1
+Da
+2
+Da
+3
+Nu
+
+//Input iesire
+9
