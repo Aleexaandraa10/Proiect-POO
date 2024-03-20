@@ -48,7 +48,7 @@ public:
 
     Rezervare (const Rezervare& masa):
     Nr_Persoane(masa.Nr_Persoane),Ora(masa.Ora),Data(masa.Data),Zona_Restaurant(masa.Zona_Restaurant),Nume_Rezervare(masa.Nume_Rezervare){}
-    
+
     Rezervare& operator=(Rezervare const& masa){
         this->Nume_Rezervare=masa.Nume_Rezervare;
         this->Nr_Persoane=masa.Nr_Persoane;
@@ -66,10 +66,10 @@ public:
     }
     friend istream& operator>>(istream& CIN, Rezervare& R); //operator de citire supraincarcat
     friend ostream& operator<<(ostream& COUT, const Rezervare& R); //operator de afisare supraincarcat
-    friend int operator>(Rezervare& masa, string& ora_limita); //operatorul> supraincarcat ca functie non-membra
+    friend int operator>(Rezervare& masa, const string& ora_limita); //operatorul> supraincarcat ca functie non-membra
     friend class Restaurant;
 
-    int operator==(Rezervare& masa) const {       //operator supraincarcat ca functie membra
+    int operator==(const Rezervare& masa) const {       //operator supraincarcat ca functie membra
         if(masa.Data==Data and Ora==masa.Ora)
             return 1;
         else
@@ -113,7 +113,7 @@ istream& operator>>(istream& CIN, Rezervare& R){
     return CIN;
 }
 
-int operator>(Rezervare& masa, string& ora_limita){ //operatorul supraincarcat >
+int operator>(Rezervare& masa, const string& ora_limita){ //operatorul supraincarcat >
                                                  // daca rezervarea este facuta dupa o anumita ora limita stabilita de restaurant, va fi refuzata
     if ( masa.GetOra() > ora_limita)
         return 0;
