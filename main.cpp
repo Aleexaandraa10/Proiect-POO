@@ -155,14 +155,13 @@ public:
 
     void Creare_Rezervare(){ //clientul poate face o rezervare
         string data, ora, zona_client, nume;
-        int nr_pers;
+        int nr_pers, pozitie=0;
         bool ok_data=false, ok_ora=false;
         cout<<"Introduceti va rog data la care ati vrea sa faceti rezervarea: "<<endl;
         cin>>data;
         cout<<"Introduceti va rog ora la care ati vrea sa faceti rezervarea tinand cont ca restuarantul nostru se deschide la 18:00!";
         cin>>ora;
         bool finish=true;
-        int pozitie;
         while(finish)
         {
             for (int i = 0; i < int(Detalii_Rezervari.size()); i++)
@@ -212,7 +211,7 @@ public:
             cout << "Ne pare rau, dar rezervarile se pot modifica cu minim 2 zile inainte." << endl;
         else {
             cout << "Rezervarea poate fi modificata, urmati pasii de mai jos: " << endl;
-            int optiune, pozitie_nume;
+            int optiune, pozitie_nume=0;
             string raspuns;
             string nume;
             cout << "Introduceti numele pe care a fost facuta rezervarea: " << endl;
