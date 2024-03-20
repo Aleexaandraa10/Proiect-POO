@@ -38,21 +38,15 @@ private:
     string Nume_Rezervare;
     string Ora;
 public:
-    Rezervare(){           
-        Nume_Rezervare="";
-        Nr_Persoane=0;
-        Ora="";
-        Data="";
-        Zona_Restaurant="";
-    }
-    
+    explicit Rezervare(string Nume_Rezervare="", int Nr_Persoane = 0, string Ora = "", string Data = "", string Zona_Restaurant = "");
+
     Rezervare(int nr_persoane, string ora, string data, string zona_restaurant, string nume_rezervare):
     Nume_Rezervare(std::move(nume_rezervare)), Nr_Persoane(nr_persoane), Ora(std::move(ora)), Data(std::move(data)),Zona_Restaurant(std::move(zona_restaurant)){}                                                                              //atribuim informatiile care ni se dau despre Rezervare
-                                                                                    
+
     Rezervare(int nr_persoane, string ora, string data,string nume_rezervare):
-            Nume_Rezervare(std::move(nume_rezervare)), Nr_Persoane(nr_persoane), Ora(std::move(ora)), Data(std::move(data)),Zona_Restaurant("Parter"){}   
-            
-    Rezervare (const Rezervare& masa){       
+            Nume_Rezervare(std::move(nume_rezervare)), Nr_Persoane(nr_persoane), Ora(std::move(ora)), Data(std::move(data)),Zona_Restaurant("Parter"){}
+
+    Rezervare (const Rezervare& masa){
         Nume_Rezervare=masa.Nume_Rezervare;
         Nr_Persoane=masa.Nr_Persoane;
         Ora=masa.Ora;
@@ -60,11 +54,12 @@ public:
         Zona_Restaurant=masa.Zona_Restaurant;
     }
     Rezervare& operator=(Rezervare const& masa){        //operator de copiere
-        Nume_Rezervare=masa.Nume_Rezervare;
-        Nr_Persoane=masa.Nr_Persoane;
-        Ora=masa.Ora;
-        Data=masa.Data;
-        Zona_Restaurant=masa.Zona_Restaurant;
+        this->Nume_Rezervare=masa.Nume_Rezervare;
+        this->Nr_Persoane=masa.Nr_Persoane;
+        this->Ora=masa.Ora;
+        this->Data=masa.Data;
+        this->Zona_Restaurant=masa.Zona_Restaurant;
+        return *this;
     }
     ~Rezervare(){//destructor
         Nume_Rezervare="";
