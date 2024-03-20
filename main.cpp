@@ -21,10 +21,10 @@ public:
     string GetCategorie(){
         return Categorie_Preparat;
     }
-    int GetGramaj() const{
+    [[nodiscard]] int GetGramaj() const{
         return Gramaj;
     }
-    int GetPret() const {
+    [[nodiscard]] int GetPret() const {
         return Pret;
     }
 
@@ -46,14 +46,11 @@ public:
     Rezervare(int nr_persoane, string ora, string data,string nume_rezervare):
             Nume_Rezervare(std::move(nume_rezervare)), Nr_Persoane(nr_persoane), Ora(std::move(ora)), Data(std::move(data)),Zona_Restaurant("Parter"){}
 
-    Rezervare (const Rezervare& masa){
-        Nume_Rezervare=masa.Nume_Rezervare;
-        Nr_Persoane=masa.Nr_Persoane;
-        Ora=masa.Ora;
-        Data=masa.Data;
-        Zona_Restaurant=masa.Zona_Restaurant;
-    }
-    Rezervare& operator=(Rezervare const& masa){        //operator de copiere
+    Rezervare (const Rezervare& masa):
+    Nume_Rezervare(masa.Nume_Rezervare),Nr_Persoane(masa.Nr_Persoane),Ora(masa.Ora),Data(masa.Data),Zona_Restaurant(masa.Zona_Restaurant){}
+
+
+    Rezervare& operator=(Rezervare const& masa){
         this->Nume_Rezervare=masa.Nume_Rezervare;
         this->Nr_Persoane=masa.Nr_Persoane;
         this->Ora=masa.Ora;
