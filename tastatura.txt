@@ -1,20 +1,3 @@
-//----------------------------------------------------Teste unitare-----------------------------------------------------
-     Rezervare R1(3,"20:30","14.03.2024","Terasa","Sephora");
-     Rezervare R2(4,"20:30","14.03.2024","Parter","Dominic");
-     cout<<R2<<endl; //operator pentru afisare
-     if (R2>"23:00"==0) //folosirea operatorului supraincarcat >
-        cout<<"Ora limita a fost depasita\n";
-     else
-        cout<<"Rezervarea poate fi facuta, ora limita nu a fost depasita\n";
-
-     if(R1==R2) //folosirea operatorului ==
-         cout<<"\nOra si data coincid";
-     else
-         cout<<"\nRezervarile nu coincid";
-     Rezervare R3; cin >> R3; cout<<endl; //operator pentru citire
-     Rezervare R4; cout<<R4; cout<<endl;  //constructor de initializare
-     Rezervare R5 (6, "18:30", "10.03.2024","Blanca"); //constructor supraincarcat
-     cout<<R5;
 
 //---------------------------------------------------Teste pentru meniul interactiv-------------------------------------------
 //Input functia Creare_Rezervare() care adauga o rezervare in sistem cu toate datele clientului
