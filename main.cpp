@@ -1,24 +1,20 @@
 #include <iostream>
 #include<string>
+#include <utility>
 #include<vector>
 
 using namespace std;
 
 class Mancare{
 private:
-    string Nume_Preparat;
-    string Categorie_Preparat;
-    int Gramaj;
-    int Pret;
+   string Nume_Preparat;
+   string Categorie_Preparat;
+   int Gramaj;
+   int Pret;
 
 public:
-    Mancare(string nume, string categorie, int gramaj, int pret){
-        Nume_Preparat=nume;
-        Categorie_Preparat=categorie;
-        Gramaj=gramaj;
-        Pret=pret;
+    Mancare(string nume, string categorie, int gramaj, int pret): Nume_Preparat(std::move(nume)), Categorie_Preparat(std::move(categorie)), Gramaj(gramaj), Pret(pret){}
 
-    }
     string GetNume(){
         return Nume_Preparat;
     }
@@ -42,31 +38,21 @@ private:
     string Nume_Rezervare;
     string Ora;
 public:
-    Rezervare(){           //constructor de initializare
+    Rezervare(){           
         Nume_Rezervare="";
         Nr_Persoane=0;
         Ora="";
         Data="";
         Zona_Restaurant="";
     }
-    Rezervare(int nr_persoane, string ora, string data, string zona_restaurant, string nume_rezervare){    //atribuim informatiile care ni se dau despre Rezervare
-        //nu stim in ce zona a restaurantului prefera sa stea clientul
-        Nume_Rezervare=nume_rezervare;
-        Nr_Persoane=nr_persoane;
-        Ora=ora;
-        Data=data;
-        Zona_Restaurant=zona_restaurant;
-    }
-    Rezervare(int nr_persoane, string ora, string data,string nume_rezervare){    //majoritatea restaurantelor se intind pe un singur nivel, deci setam zona_restaurant ca fiind parter
-        Nume_Rezervare=nume_rezervare;
-        Nr_Persoane=nr_persoane;
-        Ora=ora;
-        Data=data;
-        Zona_Restaurant="Parter";
-    }
-    //am realizat constructorul supraincarcat mai sus
-
-    Rezervare (const Rezervare& masa){       //constructor de copiere
+    
+    Rezervare(int nr_persoane, string ora, string data, string zona_restaurant, string nume_rezervare):
+    Nume_Rezervare(std::move(nume_rezervare)), Nr_Persoane(nr_persoane), Ora(std::move(ora)), Data(std::move(data)),Zona_Restaurant(std::move(zona_restaurant)){}                                                                              //atribuim informatiile care ni se dau despre Rezervare
+                                                                                    
+    Rezervare(int nr_persoane, string ora, string data,string nume_rezervare):
+            Nume_Rezervare(std::move(nume_rezervare)), Nr_Persoane(nr_persoane), Ora(std::move(ora)), Data(std::move(data)),Zona_Restaurant("Parter"){}   
+            
+    Rezervare (const Rezervare& masa){       
         Nume_Rezervare=masa.Nume_Rezervare;
         Nr_Persoane=masa.Nr_Persoane;
         Ora=masa.Ora;
@@ -89,7 +75,7 @@ public:
     }
     friend istream& operator>>(istream& CIN, Rezervare& R); //operator de citire supraincarcat
     friend ostream& operator<<(ostream& COUT, const Rezervare& R); //operator de afisare supraincarcat
-    friend int operator>(Rezervare& masa,string ora_limita); //operatorul> supraincarcat ca functie non-membra
+    friend int operator>(Rezervare& masa, string& ora_limita); //operatorul> supraincarcat ca functie non-membra
     friend class Restaurant;
 
     int operator==(Rezervare& masa) {       //operator supraincarcat ca functie membra
@@ -136,9 +122,9 @@ istream& operator>>(istream& CIN, Rezervare& R){
     return CIN;
 }
 
-int operator>(Rezervare& masa, const string ora_limita){ //operatorul supraincarcat >
-    // daca rezervarea este facuta dupa o anumita ora limita stabilita de restaurant, va fi refuzata
-    if ( masa.Ora >ora_limita)
+int operator>(Rezervare& masa, string& ora_limita){ //operatorul supraincarcat >
+                                                 // daca rezervarea este facuta dupa o anumita ora limita stabilita de restaurant, va fi refuzata
+    if ( masa.GetOra() > ora_limita)
         return 0;
     else
         return 1;
@@ -149,31 +135,31 @@ class Restaurant: Rezervare {
     vector<Mancare>Detalii_Preparate;
 public:
     Restaurant(){
-        Detalii_Rezervari.push_back(Rezervare(3,"18:30","18.03.2024","Terasa","Alexis"));
-        Detalii_Rezervari.push_back(Rezervare(10,"19:30","20.03.2024","Terasa","Andone"));
-        Detalii_Rezervari.push_back(Rezervare(2,"20:00","23.03.2024","Etaj","Banica"));
-        Detalii_Rezervari.push_back(Rezervare(3,"20:00","23.03.2024","Etaj","Bogza"));
-        Detalii_Rezervari.push_back(Rezervare(8,"21:00","23.03.2024","Parter","Chiriac"));
-        Detalii_Rezervari.push_back(Rezervare(10,"20:30","25.03.2024","Etaj","Dascalu"));
-        Detalii_Rezervari.push_back(Rezervare(6,"18:00","25.03.2024","Etaj","Alexandru"));
-        Detalii_Rezervari.push_back(Rezervare(4,"22:30","25.03.2024","Etaj","Matei"));
-        Detalii_Rezervari.push_back(Rezervare(3,"21:30","25.03.2024","Etaj","Davide"));
-        Detalii_Rezervari.push_back(Rezervare(10,"18:00","25.03.2024","Demisol","Danciu"));
-        Detalii_Rezervari.push_back(Rezervare(2,"19:00","12.03.2024","Demisol","Dediu"));
-        Detalii_Rezervari.push_back(Rezervare(10,"21:00","08.03.2024","Demisol","Irimia"));
-        Detalii_Rezervari.push_back(Rezervare(5,"19:30","13.03.2024","Parter","Flutur"));
-        Detalii_Rezervari.push_back(Rezervare(4,"21:00","27.03.2024","Parter","Iancu"));
-        Detalii_Rezervari.push_back(Rezervare(7,"22:30","14.03.2024","Parter","Lazar"));
-        Detalii_Rezervari.push_back(Rezervare(7,"23:00","21.03.2024","Parter","Lungu"));
-        Detalii_Preparate.push_back(Mancare("Classic Nachos","Fara carne",600,59));
-        Detalii_Preparate.push_back(Mancare("Classic Nachos","Fara carne",600,59));
-        Detalii_Preparate.push_back(Mancare("The Big Cheesburger","Contine carne",335,59));
-        Detalii_Preparate.push_back(Mancare("Steak Salad","Fara carne", 580,89));
-        Detalii_Preparate.push_back(Mancare("Assian Noodle Bowl","Fara carne", 595,69));
-        Detalii_Preparate.push_back(Mancare("Grilled Salmon","Contine carne",530,99));
-        Detalii_Preparate.push_back(Mancare("Homemade Apple Cobbler","Desert",380,39));
-        Detalii_Preparate.push_back(Mancare("Craft Ice Cream","Desert",90,24));
-        Detalii_Preparate.push_back(Mancare("Cookies & Cream Milkshake","Desert",220,26));
+        Detalii_Rezervari.emplace_back(3,"18:30","18.03.2024","Terasa","Alexis");
+        Detalii_Rezervari.emplace_back(10,"19:30","20.03.2024","Terasa","Andone");
+        Detalii_Rezervari.emplace_back(2,"20:00","23.03.2024","Etaj","Banica");
+        Detalii_Rezervari.emplace_back(3,"20:00","23.03.2024","Etaj","Bogza");
+        Detalii_Rezervari.emplace_back(8,"21:00","23.03.2024","Parter","Chiriac");
+        Detalii_Rezervari.emplace_back(10,"20:30","25.03.2024","Etaj","Dascalu");
+        Detalii_Rezervari.emplace_back(6,"18:00","25.03.2024","Etaj","Alexandru");
+        Detalii_Rezervari.emplace_back(4,"22:30","25.03.2024","Etaj","Matei");
+        Detalii_Rezervari.emplace_back(3,"21:30","25.03.2024","Etaj","Davide");
+        Detalii_Rezervari.emplace_back(10,"18:00","25.03.2024","Demisol","Danciu");
+        Detalii_Rezervari.emplace_back(2,"19:00","12.03.2024","Demisol","Dediu");
+        Detalii_Rezervari.emplace_back(10,"21:00","08.03.2024","Demisol","Irimia");
+        Detalii_Rezervari.emplace_back(5,"19:30","13.03.2024","Parter","Flutur");
+        Detalii_Rezervari.emplace_back(4,"21:00","27.03.2024","Parter","Iancu");
+        Detalii_Rezervari.emplace_back(7,"22:30","14.03.2024","Parter","Lazar");
+        Detalii_Rezervari.emplace_back(7,"23:00","21.03.2024","Parter","Lungu");
+        Detalii_Preparate.emplace_back("Classic Nachos","Fara carne",600,59);
+        Detalii_Preparate.emplace_back("Classic Nachos","Fara carne",600,59);
+        Detalii_Preparate.emplace_back("The Big Cheesburger","Contine carne",335,59);
+        Detalii_Preparate.emplace_back("Steak Salad","Fara carne", 580,89);
+        Detalii_Preparate.emplace_back("Assian Noodle Bowl","Fara carne", 595,69);
+        Detalii_Preparate.emplace_back("Grilled Salmon","Contine carne",530,99);
+        Detalii_Preparate.emplace_back("Homemade Apple Cobbler","Desert",380,39);
+        Detalii_Preparate.emplace_back("Craft Ice Cream","Desert",90,24);
+        Detalii_Preparate.emplace_back("Cookies & Cream Milkshake","Desert",220,26);
 
     }
 
@@ -195,19 +181,19 @@ public:
                     pozitie = i;
                     break;
                 }
-            for (int i = 0; i < Detalii_Rezervari.size(); i++)
-                if (ora == Detalii_Rezervari[i].GetOra()) {
+            for (auto & i : Detalii_Rezervari)
+                if (ora == i.GetOra()) {
                     ok_ora = true;
                     break;
                 }
             if (ok_data and ok_ora){
-                cout << "Avem deja o masa rezervata in data de " << data << " la ora " << ora << " in zona "
-                     << Detalii_Rezervari[pozitie].GetZonaRestaurant() << endl;
-                cout << "Introduceti va rog o noua data si o noua ora la care va doriti sa rezervati:"<<endl;
-                cin>>data>>ora;
-                ok_data=false; ok_ora=false;
-                pozitie=0;
-            }
+                    cout << "Avem deja o masa rezervata in data de " << data << " la ora " << ora << " in zona "
+                         << Detalii_Rezervari[pozitie].GetZonaRestaurant() << endl;
+                    cout << "Introduceti va rog o noua data si o noua ora la care va doriti sa rezervati:"<<endl;
+                    cin>>data>>ora;
+                    ok_data=false; ok_ora=false;
+                    pozitie=0;
+                }
             else {
                 cout << "Rezervarea poate fi facuta!" << endl;
                 cout << "Introduceti nr de persoane:" << endl;
@@ -216,7 +202,7 @@ public:
                 cin >> zona_client;
                 cout << "Perfect, totul este aproape gata, spuneti va rog pe ce nume sa fie facuta rezervarea." << endl;
                 cin >> nume;
-                Detalii_Rezervari.push_back(Rezervare(nr_pers, ora, data, zona_client, nume));
+                Detalii_Rezervari.emplace_back(nr_pers, ora, data, zona_client, nume);
                 cout << "Multumim, rezervarea a fost facuta, aici puteti vedea detaliile ei:\n" << endl;
                 cout << Detalii_Rezervari[Detalii_Rezervari.size() - 1];
                 finish=false;
@@ -300,39 +286,39 @@ public:
         int optiune;
         cout << "Scrieti va rog ziua pentru care doriti sa aflati orele disponibile: " << endl;
         cin >> data_client;
-        ore_disponibile.push_back("18:00");
-        ore_disponibile.push_back("18:30");
-        ore_disponibile.push_back("19:00");
-        ore_disponibile.push_back("19:30");
-        ore_disponibile.push_back("20:00");
-        ore_disponibile.push_back("20:30");
-        ore_disponibile.push_back("21:00");
-        ore_disponibile.push_back("21:30");
-        ore_disponibile.push_back("22:00");
-        ore_disponibile.push_back("22:30");
-        ore_disponibile.push_back("23:00");
-        ore_disponibile.push_back("23:30");
+        ore_disponibile.emplace_back("18:00");
+        ore_disponibile.emplace_back("18:30");
+        ore_disponibile.emplace_back("19:00");
+        ore_disponibile.emplace_back("19:30");
+        ore_disponibile.emplace_back("20:00");
+        ore_disponibile.emplace_back("20:30");
+        ore_disponibile.emplace_back("21:00");
+        ore_disponibile.emplace_back("21:30");
+        ore_disponibile.emplace_back("22:00");
+        ore_disponibile.emplace_back("22:30");
+        ore_disponibile.emplace_back("23:00");
+        ore_disponibile.emplace_back("23:30");
 
         while (optiune != 2) {
             ore_folosite.clear();
             ore_afisate.clear();
-            for (int i = 0; i < Detalii_Rezervari.size(); i++)
-                if (Detalii_Rezervari[i].GetData() == data_client)
-                    ore_folosite.push_back(Detalii_Rezervari[i].GetOra());
+            for (auto & i : Detalii_Rezervari)
+                if (i.GetData() == data_client)
+                    ore_folosite.emplace_back(i.GetOra());
 
-            for (int i = 0; i < ore_disponibile.size(); i++) {
+            for (auto & i : ore_disponibile) {
                 bool ok = true;
                 for (int j = 0; j <= ore_folosite.size(); j++)
-                    if (ore_disponibile[i] == ore_folosite[j]) {
+                    if (i == ore_folosite[j]) {
                         ok = false;
                         break;
                     }
                 if (ok)
-                    ore_afisate.push_back(ore_disponibile[i]);
+                    ore_afisate.emplace_back(i);
             }
 
-            for (int i = 0; i < ore_afisate.size(); i++)
-                cout << ore_afisate[i] << endl;
+            for (const auto & i : ore_afisate)
+                cout << i << endl;
             cout << "Doriti sa vizualizati orele disponibile si in alta zi? Raspundeti va rog cu <<Da>> sau <<Nu>>" << endl;
             cout << "1. Da" << endl;
             cout << "2. Nu" << endl;
@@ -361,11 +347,11 @@ public:
         cout<<"Aici aveti detaliile despre fiecare preparate, speram sa va placa!\n";
         while(optiune){
             if (optiune == 1) {
-                for (int i = 0; i < Detalii_Preparate.size(); i++)
-                    if (Detalii_Preparate[i].GetCategorie() == "Contine carne"){
-                        cout<<"Denumire-->"<<Detalii_Preparate[i].GetNume()<<endl;
-                        cout<<"Gramaj-->"<<Detalii_Preparate[i].GetGramaj()<<endl;
-                        cout<<"Pret-->"<<Detalii_Preparate[i].GetPret()<<endl;
+                for (auto & i : Detalii_Preparate)
+                    if (i.GetCategorie() == "Contine carne"){
+                        cout<<"Denumire-->"<<i.GetNume()<<endl;
+                        cout<<"Gramaj-->"<<i.GetGramaj()<<endl;
+                        cout<<"Pret-->"<<i.GetPret()<<endl;
                         cout<<endl;
                     }
                 cout<<"Mai doriti sa vizualizati altceva? Raspundeti va rog cu <<Da>> sau <<Nu>>\n";
@@ -381,11 +367,11 @@ public:
                 }
             }
             if (optiune == 2) {
-                for (int i = 0; i < Detalii_Preparate.size(); i++)
-                    if (Detalii_Preparate[i].GetCategorie() == "Fara carne") {
-                        cout << "Denumire-->" << Detalii_Preparate[i].GetNume() << endl;
-                        cout << "Gramaj-->" << Detalii_Preparate[i].GetGramaj() << endl;
-                        cout << "Pret-->" << Detalii_Preparate[i].GetPret() << endl;
+                for (auto & i : Detalii_Preparate)
+                    if (i.GetCategorie() == "Fara carne") {
+                        cout << "Denumire-->" << i.GetNume() << endl;
+                        cout << "Gramaj-->" << i.GetGramaj() << endl;
+                        cout << "Pret-->" << i.GetPret() << endl;
                         cout << endl;
                     }
                 cout << "Mai doriti sa vizualizati altceva? Raspundeti va rog cu <<Da>> sau <<Nu>>\n";
@@ -401,11 +387,11 @@ public:
                 }
             }
             if (optiune == 3) {
-                for (int i = 0; i < Detalii_Preparate.size(); i++)
-                    if (Detalii_Preparate[i].GetCategorie() == "Desert") {
-                        cout << "Denumire-->" << Detalii_Preparate[i].GetNume() << endl;
-                        cout << "Gramaj-->" << Detalii_Preparate[i].GetGramaj() << endl;
-                        cout << "Pret-->" << Detalii_Preparate[i].GetPret() << endl;
+                for (auto & i : Detalii_Preparate)
+                    if (i.GetCategorie() == "Desert") {
+                        cout << "Denumire-->" << i.GetNume() << endl;
+                        cout << "Gramaj-->" << i.GetGramaj() << endl;
+                        cout << "Pret-->" << i.GetPret() << endl;
                         cout << endl;
                     }
                 cout << "Mai doriti sa vizualizati altceva? Raspundeti va rog cu <<Da>> sau <<Nu>>\n";
@@ -427,74 +413,74 @@ public:
 
 int main() {
 
-    Restaurant restaurant;
-    int continua=1, raspuns;
-    cout << "Bun venit la restaurantul nostru!\nCe serviciu doriti sa folositi?\n";
-    while(continua)
-    {
-        cout<<"1. Rezerva masa."<<endl;
-        cout<<"2. Modifica o rezervare deja existenta."<<endl;
-        cout<<"3. Verifica disponibilitate ore dintr-o anumita zi."<<endl;
-        cout<<"4. Recomandarile bucatarului."<<endl;
-        cout<<"9. Am vizualizat ce mi-am dorit."<<endl;
-        cin>>raspuns;
-        if(raspuns==1)
-        {
-            cout<<"Urmariti pasii--> ";
-            restaurant.Creare_Rezervare();
-            cout<<"Doriti alta optiune in continuare?"<<endl;
-            cout<<"1. Rezerva masa."<<endl;
-            cout<<"2. Modifica o rezervare deja existenta."<<endl;
-            cout<<"3. Verifica disponibilitate ore dintr-o anumita zi."<<endl;
-            cout<<"4. Recomandarile bucatarului."<<endl;
-            cout<<"9. Am vizualizat ce mi-am dorit."<<endl;
-            cin>>raspuns;
-        }
-        if(raspuns==2)
-        {
-            cout<<"Urmariti pasii--> ";
-            restaurant.Modificare_Detalii_Rezervare();
-            cout<<"Doriti alta optiune in continuare?"<<endl;
-            cout<<"1. Rezerva masa."<<endl;
-            cout<<"2. Modifica o rezervare deja existenta."<<endl;
-            cout<<"3. Verifica disponibilitate ore dintr-o anumita zi."<<endl;
-            cout<<"4. Recomandarile bucatarului."<<endl;
-            cout<<"9. Am vizualizat ce mi-am dorit"<<endl;
-            cin>>raspuns;
-        }
-        if(raspuns==3)
-        {
-            cout<<"Urmariti pasii--> ";
-            restaurant.OreDisponibile();
-            cout<<"Doriti alta optiune in continuare?"<<endl;
-            cout<<"1. Rezerva masa."<<endl;
-            cout<<"2. Modifica o rezervare deja existenta."<<endl;
-            cout<<"3. Verifica disponibilitate ore dintr-o anumita zi."<<endl;
-            cout<<"4. Recomandarile bucatarului."<<endl;
-            cout<<"9. Am vizualizat ce mi-am dorit."<<endl;
-            cin>>raspuns;
-        }
-        if(raspuns==4)
-        {
-            cout<<"Mai jos puteti gasi cele mai bune preparate ale bucatarului in caz de aveti nevoie de inspiratie:"<<endl;
-            restaurant.Recomandari_Culinare();
-            cout<<"Pofta buna!\n\n";
-            cout<<"Doresti alta optiune in continuare?"<<endl;
-            cout<<"1. Rezerva masa."<<endl;
-            cout<<"2. Modifica o rezervare deja existenta."<<endl;
-            cout<<"3. Verifica disponibilitate ore dintr-o anumita zi."<<endl;
-            cout<<"4. Recomandarile bucatarului."<<endl;
-            cout<<"9. Am vizualizat ce mi-am dorit."<<endl;
-            cin>>raspuns;
-        }
-        if(raspuns==9)
-        {
-            cout<<"Multumim ca ati ales restaurantul nostru! ";
-            cout<<"Va dorim o zi minunata! ";
-            continua=0;
-        }
+     Restaurant restaurant;
+     int continua=1, raspuns;
+     cout << "Bun venit la restaurantul nostru!\nCe serviciu doriti sa folositi?\n";
+     while(continua)
+     {
+         cout<<"1. Rezerva masa."<<endl;
+         cout<<"2. Modifica o rezervare deja existenta."<<endl;
+         cout<<"3. Verifica disponibilitate ore dintr-o anumita zi."<<endl;
+         cout<<"4. Recomandarile bucatarului."<<endl;
+         cout<<"9. Am vizualizat ce mi-am dorit."<<endl;
+         cin>>raspuns;
+         if(raspuns==1)
+         {
+             cout<<"Urmariti pasii--> ";
+             restaurant.Creare_Rezervare();
+             cout<<"Doriti alta optiune in continuare?"<<endl;
+             cout<<"1. Rezerva masa."<<endl;
+             cout<<"2. Modifica o rezervare deja existenta."<<endl;
+             cout<<"3. Verifica disponibilitate ore dintr-o anumita zi."<<endl;
+             cout<<"4. Recomandarile bucatarului."<<endl;
+             cout<<"9. Am vizualizat ce mi-am dorit."<<endl;
+             cin>>raspuns;
+         }
+         if(raspuns==2)
+         {
+             cout<<"Urmariti pasii--> ";
+             restaurant.Modificare_Detalii_Rezervare();
+             cout<<"Doriti alta optiune in continuare?"<<endl;
+             cout<<"1. Rezerva masa."<<endl;
+             cout<<"2. Modifica o rezervare deja existenta."<<endl;
+             cout<<"3. Verifica disponibilitate ore dintr-o anumita zi."<<endl;
+             cout<<"4. Recomandarile bucatarului."<<endl;
+             cout<<"9. Am vizualizat ce mi-am dorit"<<endl;
+             cin>>raspuns;
+         }
+         if(raspuns==3)
+         {
+             cout<<"Urmariti pasii--> ";
+             restaurant.OreDisponibile();
+             cout<<"Doriti alta optiune in continuare?"<<endl;
+             cout<<"1. Rezerva masa."<<endl;
+             cout<<"2. Modifica o rezervare deja existenta."<<endl;
+             cout<<"3. Verifica disponibilitate ore dintr-o anumita zi."<<endl;
+             cout<<"4. Recomandarile bucatarului."<<endl;
+             cout<<"9. Am vizualizat ce mi-am dorit."<<endl;
+             cin>>raspuns;
+         }
+         if(raspuns==4)
+         {
+             cout<<"Mai jos puteti gasi cele mai bune preparate ale bucatarului in caz de aveti nevoie de inspiratie:"<<endl;
+             restaurant.Recomandari_Culinare();
+             cout<<"Pofta buna!\n\n";
+             cout<<"Doresti alta optiune in continuare?"<<endl;
+             cout<<"1. Rezerva masa."<<endl;
+             cout<<"2. Modifica o rezervare deja existenta."<<endl;
+             cout<<"3. Verifica disponibilitate ore dintr-o anumita zi."<<endl;
+             cout<<"4. Recomandarile bucatarului."<<endl;
+             cout<<"9. Am vizualizat ce mi-am dorit."<<endl;
+             cin>>raspuns;
+         }
+         if(raspuns==9)
+         {
+             cout<<"Multumim ca ati ales restaurantul nostru! ";
+             cout<<"Va dorim o zi minunata! ";
+             continua=0;
+         }
 
-    }
+     }
 
-    return 0;
+     return 0;
 }
