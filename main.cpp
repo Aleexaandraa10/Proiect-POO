@@ -38,16 +38,15 @@ private:
     string Zona_Restaurant;
     string Nume_Rezervare;
 public:
-    //explicit Rezervare(int Nr_Persoane = 0, string Ora = "", string Data = "",string Zona_Restaurant = "",string Nume_Rezervare="");
 
-    Rezervare(int nr_persoane = 0, string ora = "", string data = "", string zona_restaurant = "", string nume_rezervare =""):
-    Nume_Rezervare(std::move(nume_rezervare)), Nr_Persoane(nr_persoane), Ora(std::move(ora)), Data(std::move(data)),Zona_Restaurant(std::move(zona_restaurant)){}                                                                              //atribuim informatiile care ni se dau despre Rezervare
+    explicit Rezervare(int nr_persoane = 0, string ora = "", string data = "", string zona_restaurant = "", string nume_rezervare =""):
+    Nr_Persoane(nr_persoane), Ora(std::move(ora)), Data(std::move(data)), Zona_Restaurant(std::move(zona_restaurant)),Nume_Rezervare(std::move(nume_rezervare)){}                                                                              //atribuim informatiile care ni se dau despre Rezervare
 
     Rezervare(int nr_persoane, string ora, string data,string nume_rezervare):
-    Nr_Persoane(nr_persoane),Nume_Rezervare(std::move(nume_rezervare)), Ora(std::move(ora)), Data(std::move(data)),Zona_Restaurant("Parter"){}
+    Nr_Persoane(nr_persoane), Ora(std::move(ora)), Data(std::move(data)), Zona_Restaurant("Parter"),Nume_Rezervare(std::move(nume_rezervare)){}
 
     Rezervare (const Rezervare& masa):
-    Nr_Persoane(masa.Nr_Persoane),Ora(masa.Ora),Data(masa.Data),Zona_Restaurant(masa.Zona_Restaurant),Nume_Rezervare(masa.Nume_Rezervare){}
+    Nr_Persoane(masa.Nr_Persoane),Ora(masa.Ora),Data(masa.Data), Zona_Restaurant(masa.Zona_Restaurant),Nume_Rezervare(masa.Nume_Rezervare){}
 
     Rezervare& operator=(Rezervare const& masa){
         this->Nume_Rezervare=masa.Nume_Rezervare;
@@ -166,7 +165,7 @@ public:
         int pozitie;
         while(finish)
         {
-            for (int i = 0; i < Detalii_Rezervari.size(); i++)
+            for (int i = 0; i < int(Detalii_Rezervari.size()); i++)
                 if (data == Detalii_Rezervari[i].GetData()) {
                     ok_data = true;
                     pozitie = i;
@@ -218,7 +217,7 @@ public:
             string nume;
             cout << "Introduceti numele pe care a fost facuta rezervarea: " << endl;
             cin >> nume;
-            for (int i = 0; i < Detalii_Rezervari.size(); i++)
+            for (int i = 0; i < int(Detalii_Rezervari.size()); i++)
                 if (Detalii_Rezervari[i].GetNumeRezervare() == nume) {
                     pozitie_nume = i;
                     break;
