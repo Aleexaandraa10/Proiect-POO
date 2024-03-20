@@ -70,7 +70,7 @@ public:
     friend int operator>(Rezervare& masa, string& ora_limita); //operatorul> supraincarcat ca functie non-membra
     friend class Restaurant;
 
-    int operator==(Rezervare& masa) {       //operator supraincarcat ca functie membra
+    int operator==(Rezervare& masa) const {       //operator supraincarcat ca functie membra
         if(masa.Data==Data and Ora==masa.Ora)
             return 1;
         else
@@ -275,7 +275,7 @@ public:
         vector<string> ore_disponibile;
         vector<string> ore_folosite;
         vector<string> ore_afisate;
-        int optiune;
+        int optiune=1;
         cout << "Scrieti va rog ziua pentru care doriti sa aflati orele disponibile: " << endl;
         cin >> data_client;
         ore_disponibile.emplace_back("18:00");
@@ -300,8 +300,8 @@ public:
 
             for (auto & i : ore_disponibile) {
                 bool ok = true;
-                for (int j = 0; j <= ore_folosite.size(); j++)
-                    if (i == ore_folosite[j]) {
+                for(auto &j: ore_folosite)
+                    if (i == j) {
                         ok = false;
                         break;
                     }
