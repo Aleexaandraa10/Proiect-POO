@@ -33,23 +33,22 @@ public:
 class Rezervare{
 private:
     int Nr_Persoane;
+    string Ora;
     string Data;
     string Zona_Restaurant;
     string Nume_Rezervare;
-    string Ora;
 public:
-    explicit Rezervare(string Nume_Rezervare="", int Nr_Persoane = 0, string Ora = "", string Data = "", string Zona_Restaurant = "");
+    //explicit Rezervare(int Nr_Persoane = 0, string Ora = "", string Data = "",string Zona_Restaurant = "",string Nume_Rezervare="");
 
-    Rezervare(int nr_persoane, string ora, string data, string zona_restaurant, string nume_rezervare):
+    Rezervare(int nr_persoane = 0, string ora = "", string data = "", string zona_restaurant = "", string nume_rezervare =""):
     Nume_Rezervare(std::move(nume_rezervare)), Nr_Persoane(nr_persoane), Ora(std::move(ora)), Data(std::move(data)),Zona_Restaurant(std::move(zona_restaurant)){}                                                                              //atribuim informatiile care ni se dau despre Rezervare
 
     Rezervare(int nr_persoane, string ora, string data,string nume_rezervare):
-            Nume_Rezervare(std::move(nume_rezervare)), Nr_Persoane(nr_persoane), Ora(std::move(ora)), Data(std::move(data)),Zona_Restaurant("Parter"){}
+    Nr_Persoane(nr_persoane),Nume_Rezervare(std::move(nume_rezervare)), Ora(std::move(ora)), Data(std::move(data)),Zona_Restaurant("Parter"){}
 
     Rezervare (const Rezervare& masa):
-    Nume_Rezervare(masa.Nume_Rezervare),Nr_Persoane(masa.Nr_Persoane),Ora(masa.Ora),Data(masa.Data),Zona_Restaurant(masa.Zona_Restaurant){}
-
-
+    Nr_Persoane(masa.Nr_Persoane),Ora(masa.Ora),Data(masa.Data),Zona_Restaurant(masa.Zona_Restaurant),Nume_Rezervare(masa.Nume_Rezervare){}
+    
     Rezervare& operator=(Rezervare const& masa){
         this->Nume_Rezervare=masa.Nume_Rezervare;
         this->Nr_Persoane=masa.Nr_Persoane;
@@ -190,6 +189,7 @@ public:
                 cout << "Rezervarea poate fi facuta!" << endl;
                 cout << "Introduceti nr de persoane:" << endl;
                 cin >> nr_pers;
+                cin.get();
                 cout<< "In ce zona a restaurantului ati vrea sa stati?\nLa acest restaurant sunt disponibile urmatoarele zone:\nParter\nEtaj\nTerasa\nDemisol\n";
                 cin >> zona_client;
                 cout << "Perfect, totul este aproape gata, spuneti va rog pe ce nume sa fie facuta rezervarea." << endl;
