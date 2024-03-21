@@ -27,7 +27,6 @@ public:
     [[nodiscard]] int GetPret() const {
         return Pret;
     }
-
 };
 
 class Rezervare{
@@ -38,7 +37,6 @@ private:
     string Zona_Restaurant;
     string Nume_Rezervare;
 public:
-
     explicit Rezervare(int nr_persoane = 0, string ora = "", string data = "", string zona_restaurant = "", string nume_rezervare =""):
     Nr_Persoane(nr_persoane), Ora(std::move(ora)), Data(std::move(data)), Zona_Restaurant(std::move(zona_restaurant)),Nume_Rezervare(std::move(nume_rezervare)){}                                                                              //atribuim informatiile care ni se dau despre Rezervare
 
@@ -113,10 +111,10 @@ istream& operator>>(istream& CIN, Rezervare& R){
 }
 
 int operator>(Rezervare& masa, const string& ora_limita){ //operatorul supraincarcat >
-                                                 // daca rezervarea este facuta dupa o anumita ora limita stabilita de restaurant, va fi refuzata
-    if ( masa.GetOra() > ora_limita)
+                                                        // daca rezervarea este facuta dupa o anumita ora limita stabilita de restaurant, va fi refuzata
+    if (masa.GetOra() > ora_limita) {
         return 0;
-    else
+    } else
         return 1;
 }
 
@@ -150,7 +148,6 @@ public:
         Detalii_Preparate.emplace_back("Homemade Apple Cobbler","Desert",380,39);
         Detalii_Preparate.emplace_back("Craft Ice Cream","Desert",90,24);
         Detalii_Preparate.emplace_back("Cookies & Cream Milkshake","Desert",220,26);
-
     }
 
     void Creare_Rezervare(){ //clientul poate face o rezervare
@@ -158,9 +155,9 @@ public:
         string datarez;
         int nr_pers, pozitie=0;
         bool ok_data=false, ok_ora=false;
-        cout<<"Introduceti va rog data la care ati vrea sa faceti rezervarea: "<<endl;
+        cout<<"Introduceti va rog data la care ati vrea sa faceti rezervarea:\n";
         cin>>data;
-        cout<<"Introduceti va rog ora la care ati vrea sa faceti rezervarea tinand cont ca restuarantul nostru se deschide la 18:00!"<<endl;
+        cout<<"Introduceti va rog ora la care ati vrea sa faceti rezervarea tinand cont ca restuarantul nostru se deschide la 18:00!\n";
         cin>>ora;
         bool finish=true;
         while(finish)
@@ -180,20 +177,19 @@ public:
             if (ok_data and ok_ora){
                     cout <<"Avem deja o masa rezervata in data de " << data << " la ora " << ora << " in zona "
                          << Detalii_Rezervari[pozitie].GetZonaRestaurant() << endl;
-                    cout << "Introduceti va rog o noua data si o noua ora la care va doriti sa rezervati:"<<endl;
+                    cout << "Introduceti va rog o noua data si o noua ora la care va doriti sa rezervati:\n";
                     ok_data=false; ok_ora=false;
                     pozitie=0;
                     cin>>data>>ora;
-
                 }
             else {
                 cout << "Rezervarea poate fi facuta!" << endl;
-                cout << "Introduceti nr de persoane:" << endl;
+                cout << "Introduceti nr de persoane:\n";
                 cin >> nr_pers;
                 cin.get();
                 cout<< "In ce zona a restaurantului ati vrea sa stati?\nLa acest restaurant sunt disponibile urmatoarele zone:\nParter\nEtaj\nTerasa\nDemisol\n";
                 cin >> zona_client;
-                cout << "Perfect, totul este aproape gata, spuneti va rog pe ce nume sa fie facuta rezervarea." << endl;
+                cout << "Perfect, totul este aproape gata, spuneti va rog pe ce nume sa fie facuta rezervarea.\n";
                 cin >> nume;
                 Detalii_Rezervari.emplace_back(nr_pers, ora, data, zona_client, nume);
                 cout << "Multumim, rezervarea a fost facuta, aici puteti vedea detaliile ei:\n" << endl;
@@ -206,12 +202,12 @@ public:
 
     void Modificare_Detalii_Rezervare() { //clientul poate modifica complet rezervarea
         string data_rezervare;
-        cout << "Va rog introduceti ziua in care ati facut rezervarea: " << endl;
+        cout << "Va rog introduceti ziua in care ati facut rezervarea:\n";
         cin >> data_rezervare;
-        cout << "Rezervarea poate fi modificata, urmati pasii de mai jos: " << endl;
+        cout << "Rezervarea poate fi modificata, urmati pasii de mai jos:\n";
         int optiune, pozitie_nume=0;
         string raspuns, nume;
-        cout << "Introduceti numele pe care a fost facuta rezervarea: " << endl;
+        cout << "Introduceti numele pe care a fost facuta rezervarea:\n";
         cin >> nume;
         for (int i = 0; i < int(Detalii_Rezervari.size()); i++)
             if (Detalii_Rezervari[i].GetNumeRezervare() == nume) {
@@ -226,10 +222,10 @@ public:
         while (optiune != 0) {
             if (optiune==1) {
                 string data_noua;
-                cout << "Care este noua data pe care o doriti?" << endl;
+                cout << "Care este noua data pe care o doriti?\n";
                 cin >> data_noua;
                 Detalii_Rezervari[pozitie_nume].Data=data_noua;
-                cout<<endl<<"Asa arata rezervarea dvs modificata in acest moment: "<<endl<<endl;
+                cout<<endl<<"Asa arata rezervarea dvs modificata in acest moment:\n\n";
                 cout << Detalii_Rezervari[pozitie_nume];
             }
             if (optiune == 2) {
@@ -237,18 +233,18 @@ public:
                 cout << "Care este noua ora pe care o doriti?" << endl;
                 cin >> ora_noua;
                 Detalii_Rezervari[pozitie_nume].Ora=ora_noua;
-                cout<<endl<<"Asa arata rezervarea dvs modificata in acest moment: "<<endl<<endl;
+                cout<<endl<<"Asa arata rezervarea dvs modificata in acest moment:\n\n";
                 cout << Detalii_Rezervari[pozitie_nume];
             }
             if (optiune == 3) {
                 int nr_persoane_nou;
-                cout << "Care este noul numar de persoane care vor participa?" << endl;
+                cout << "Care este noul numar de persoane care vor participa?\n";
                 cin >> nr_persoane_nou;
                 Detalii_Rezervari[pozitie_nume].Nr_Persoane=nr_persoane_nou;
-                cout<<endl<<"Asa arata rezervarea dvs modificata in acest moment: "<<endl<<endl;
+                cout<<endl<<"Asa arata rezervarea dvs modificata in acest moment:\n\n";
                 cout << Detalii_Rezervari[pozitie_nume];
             }
-            cout<<endl<<"Mai doriti sa modificati ceva la rezervarea dvs? Va rog raspundeti cu <<Da>> sau <<Nu>>"<<endl;
+            cout<<endl<<"Mai doriti sa modificati ceva la rezervarea dvs? Va rog raspundeti cu <<Da>> sau <<Nu>>\n";
             cin>>raspuns;
             if (raspuns=="Da")
             {
@@ -270,7 +266,7 @@ public:
         vector<string> ore_folosite;
         vector<string> ore_afisate;
         int optiune=1;
-        cout << "Scrieti va rog ziua pentru care doriti sa aflati orele disponibile: " << endl;
+        cout << "Scrieti va rog ziua pentru care doriti sa aflati orele disponibile:\n";
         cin >> data_client;
         ore_disponibile.emplace_back("18:00");
         ore_disponibile.emplace_back("18:30");
@@ -291,7 +287,6 @@ public:
             for (auto & i : Detalii_Rezervari)
                 if (i.GetData() == data_client)
                     ore_folosite.emplace_back(i.GetOra());
-
             for (auto & i : ore_disponibile) {
                 bool ok = true;
                 for(auto &j: ore_folosite)
@@ -305,14 +300,14 @@ public:
 
             for (const auto & i : ore_afisate)
                 cout << i << endl;
-            cout << "Doriti sa vizualizati orele disponibile si in alta zi? Raspundeti va rog cu <<Da>> sau <<Nu>>" << endl;
+            cout << "Doriti sa vizualizati orele disponibile si in alta zi? Raspundeti va rog cu <<Da>> sau <<Nu>>\n";
             cout << "1. Da" << endl;
             cout << "2. Nu" << endl;
             cin>>raspuns;
             if(raspuns=="Da")
             {
                 optiune=1;
-                cout<<"Introduceti va rog noua data pe care doriti sa o vizualizati."<<endl;
+                cout<<"Introduceti va rog noua data pe care doriti sa o vizualizati.\n";
                 cin>>data_client;
             }
             else
@@ -401,9 +396,10 @@ int main() {
 
      Restaurant restaurant;
      int continua=1, raspuns;
+     cout<<"Bun venit la restaurantul nostru!\n";
      while(continua)
      {
-         cout << "Bun venit la restaurantul nostru!\nCe serviciu doriti sa folositi?\n";
+         cout << "\nCe serviciu doriti sa folositi?\n";
          cout<<"1. Rezerva masa."<<endl;
          cout<<"2. Modifica o rezervare deja existenta."<<endl;
          cout<<"3. Verifica disponibilitate ore dintr-o anumita zi."<<endl;
