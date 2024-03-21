@@ -155,6 +155,7 @@ public:
 
     void Creare_Rezervare(){ //clientul poate face o rezervare
         string data, ora, zona_client, nume;
+        string datarez;
         int nr_pers, pozitie=0;
         bool ok_data=false, ok_ora=false;
         cout<<"Introduceti va rog data la care ati vrea sa faceti rezervarea: "<<endl;
@@ -166,12 +167,13 @@ public:
         {
             for (int i = 0; i < int(Detalii_Rezervari.size()); i++)
                 if (data == Detalii_Rezervari[i].GetData()) {
+                    datarez = Detalii_Rezervari[i].GetData();
                     ok_data = true;
                     pozitie = i;
                     break;
                 }
             for (auto & i : Detalii_Rezervari)
-                if (ora == i.GetOra()) {
+                if (ora == i.GetOra() and i.GetData() == datarez) {
                     ok_ora = true;
                     break;
                 }
@@ -412,50 +414,21 @@ int main() {
          {
              cout<<"Urmariti pasii--> ";
              restaurant.Creare_Rezervare();
-//             cout<<"Doriti alta optiune in continuare?"<<endl;
-//             cout<<"1. Rezerva masa."<<endl;
-//             cout<<"2. Modifica o rezervare deja existenta."<<endl;
-//             cout<<"3. Verifica disponibilitate ore dintr-o anumita zi."<<endl;
-//             cout<<"4. Recomandarile bucatarului."<<endl;
-//             cout<<"9. Am vizualizat ce mi-am dorit."<<endl;
-//             cin>>raspuns;
          }
          if(raspuns==2)
          {
              cout<<"Urmariti pasii--> ";
              restaurant.Modificare_Detalii_Rezervare();
-//             cout<<"Doriti alta optiune in continuare?"<<endl;
-//             cout<<"1. Rezerva masa."<<endl;
-//             cout<<"2. Modifica o rezervare deja existenta."<<endl;
-//             cout<<"3. Verifica disponibilitate ore dintr-o anumita zi."<<endl;
-//             cout<<"4. Recomandarile bucatarului."<<endl;
-//             cout<<"9. Am vizualizat ce mi-am dorit"<<endl;
-//             cin>>raspuns;
          }
          if(raspuns==3)
          {
              cout<<"Urmariti pasii--> ";
              restaurant.OreDisponibile();
-//             cout<<"Doriti alta optiune in continuare?"<<endl;
-//             cout<<"1. Rezerva masa."<<endl;
-//             cout<<"2. Modifica o rezervare deja existenta."<<endl;
-//             cout<<"3. Verifica disponibilitate ore dintr-o anumita zi."<<endl;
-//             cout<<"4. Recomandarile bucatarului."<<endl;
-//             cout<<"9. Am vizualizat ce mi-am dorit."<<endl;
-//             cin>>raspuns;
          }
          if(raspuns==4)
          {
              cout<<"Mai jos puteti gasi cele mai bune preparate ale bucatarului in caz de aveti nevoie de inspiratie:"<<endl;
              restaurant.Recomandari_Culinare();
-//             cout<<"Pofta buna!\n\n";
-//             cout<<"Doresti alta optiune in continuare?"<<endl;
-//             cout<<"1. Rezerva masa."<<endl;
-//             cout<<"2. Modifica o rezervare deja existenta."<<endl;
-//             cout<<"3. Verifica disponibilitate ore dintr-o anumita zi."<<endl;
-//             cout<<"4. Recomandarile bucatarului."<<endl;
-//             cout<<"9. Am vizualizat ce mi-am dorit."<<endl;
-//             cin>>raspuns;
          }
          if(raspuns==9)
          {
@@ -463,8 +436,6 @@ int main() {
              cout<<"Va dorim o zi minunata! ";
              continua=0;
          }
-
      }
-
      return 0;
 }
