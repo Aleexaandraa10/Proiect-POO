@@ -412,50 +412,50 @@ int main() {
          {
              cout<<"Urmariti pasii--> ";
              restaurant.Creare_Rezervare();
-             cout<<"Doriti alta optiune in continuare?"<<endl;
-             cout<<"1. Rezerva masa."<<endl;
-             cout<<"2. Modifica o rezervare deja existenta."<<endl;
-             cout<<"3. Verifica disponibilitate ore dintr-o anumita zi."<<endl;
-             cout<<"4. Recomandarile bucatarului."<<endl;
-             cout<<"9. Am vizualizat ce mi-am dorit."<<endl;
-             cin>>raspuns;
+//             cout<<"Doriti alta optiune in continuare?"<<endl;
+//             cout<<"1. Rezerva masa."<<endl;
+//             cout<<"2. Modifica o rezervare deja existenta."<<endl;
+//             cout<<"3. Verifica disponibilitate ore dintr-o anumita zi."<<endl;
+//             cout<<"4. Recomandarile bucatarului."<<endl;
+//             cout<<"9. Am vizualizat ce mi-am dorit."<<endl;
+//             cin>>raspuns;
          }
          if(raspuns==2)
          {
              cout<<"Urmariti pasii--> ";
              restaurant.Modificare_Detalii_Rezervare();
-             cout<<"Doriti alta optiune in continuare?"<<endl;
-             cout<<"1. Rezerva masa."<<endl;
-             cout<<"2. Modifica o rezervare deja existenta."<<endl;
-             cout<<"3. Verifica disponibilitate ore dintr-o anumita zi."<<endl;
-             cout<<"4. Recomandarile bucatarului."<<endl;
-             cout<<"9. Am vizualizat ce mi-am dorit"<<endl;
-             cin>>raspuns;
+//             cout<<"Doriti alta optiune in continuare?"<<endl;
+//             cout<<"1. Rezerva masa."<<endl;
+//             cout<<"2. Modifica o rezervare deja existenta."<<endl;
+//             cout<<"3. Verifica disponibilitate ore dintr-o anumita zi."<<endl;
+//             cout<<"4. Recomandarile bucatarului."<<endl;
+//             cout<<"9. Am vizualizat ce mi-am dorit"<<endl;
+//             cin>>raspuns;
          }
          if(raspuns==3)
          {
              cout<<"Urmariti pasii--> ";
              restaurant.OreDisponibile();
-             cout<<"Doriti alta optiune in continuare?"<<endl;
-             cout<<"1. Rezerva masa."<<endl;
-             cout<<"2. Modifica o rezervare deja existenta."<<endl;
-             cout<<"3. Verifica disponibilitate ore dintr-o anumita zi."<<endl;
-             cout<<"4. Recomandarile bucatarului."<<endl;
-             cout<<"9. Am vizualizat ce mi-am dorit."<<endl;
-             cin>>raspuns;
+//             cout<<"Doriti alta optiune in continuare?"<<endl;
+//             cout<<"1. Rezerva masa."<<endl;
+//             cout<<"2. Modifica o rezervare deja existenta."<<endl;
+//             cout<<"3. Verifica disponibilitate ore dintr-o anumita zi."<<endl;
+//             cout<<"4. Recomandarile bucatarului."<<endl;
+//             cout<<"9. Am vizualizat ce mi-am dorit."<<endl;
+//             cin>>raspuns;
          }
          if(raspuns==4)
          {
              cout<<"Mai jos puteti gasi cele mai bune preparate ale bucatarului in caz de aveti nevoie de inspiratie:"<<endl;
              restaurant.Recomandari_Culinare();
-             cout<<"Pofta buna!\n\n";
-             cout<<"Doresti alta optiune in continuare?"<<endl;
-             cout<<"1. Rezerva masa."<<endl;
-             cout<<"2. Modifica o rezervare deja existenta."<<endl;
-             cout<<"3. Verifica disponibilitate ore dintr-o anumita zi."<<endl;
-             cout<<"4. Recomandarile bucatarului."<<endl;
-             cout<<"9. Am vizualizat ce mi-am dorit."<<endl;
-             cin>>raspuns;
+//             cout<<"Pofta buna!\n\n";
+//             cout<<"Doresti alta optiune in continuare?"<<endl;
+//             cout<<"1. Rezerva masa."<<endl;
+//             cout<<"2. Modifica o rezervare deja existenta."<<endl;
+//             cout<<"3. Verifica disponibilitate ore dintr-o anumita zi."<<endl;
+//             cout<<"4. Recomandarile bucatarului."<<endl;
+//             cout<<"9. Am vizualizat ce mi-am dorit."<<endl;
+//             cin>>raspuns;
          }
          if(raspuns==9)
          {
