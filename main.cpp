@@ -61,8 +61,8 @@ public:
         Data="";
         Zona_Restaurant="";
     }
-    friend istream& operator>>(istream& CIN, Rezervare& R); //operator de citire supraincarcat
-    friend ostream& operator<<(ostream& COUT, const Rezervare& R); //operator de afisare supraincarcat
+    friend istream& operator>>(istream& in, Rezervare& R); //operator de citire supraincarcat
+    friend ostream& operator<<(ostream& out, const Rezervare& R); //operator de afisare supraincarcat
     friend int operator>(Rezervare& masa, const string& ora_limita); //operatorul> supraincarcat ca functie non-membra
     friend class Restaurant;
 
@@ -87,27 +87,27 @@ public:
     }
 };
 
-ostream& operator<<(ostream& COUT, const Rezervare& R){
-    COUT<<"Numele pe care a fost facuta rezervarea este: "<<R.Nume_Rezervare<<endl;
-    COUT<<"Nr de persoane care participa este: "<<R.Nr_Persoane<<endl;
-    COUT<<"Ora la care masa a fost rezervata este: "<<R.Ora<<endl;
-    COUT<<"Data rezervarii este: "<<R.Data<<endl;
-    COUT<<"Zona restaurantului aleasa este: "<<R.Zona_Restaurant<<endl;
-    return COUT;
+ostream& operator<<(ostream& out, const Rezervare& R){
+    out<<"Numele pe care a fost facuta rezervarea este: "<<R.Nume_Rezervare<<endl;
+    out<<"Nr de persoane care participa este: "<<R.Nr_Persoane<<endl;
+    out<<"Ora la care masa a fost rezervata este: "<<R.Ora<<endl;
+    out<<"Data rezervarii este: "<<R.Data<<endl;
+    out<<"Zona restaurantului aleasa este: "<<R.Zona_Restaurant<<endl;
+    return out;
 }
 
-istream& operator>>(istream& CIN, Rezervare& R){
+istream& operator>>(istream& in, Rezervare& R){
     cout<<"Numele pe care a fost facuta rezervarea este: "<<endl;
-    CIN>>R.Nume_Rezervare;
+    in>>R.Nume_Rezervare;
     cout<<"Nr de persoane care participa este: "<<endl;
-    CIN>>R.Nr_Persoane;
+    in>>R.Nr_Persoane;
     cout<<"Ora la care masa a fost rezervata este: "<<endl;
-    CIN>>R.Ora;
+    in>>R.Ora;
     cout<<"Data rezervarii este: "<<endl;
-    CIN>>R.Data;
+    in>>R.Data;
     cout<<"Zona restaurantului aleasa este: "<<endl;
-    CIN>>R.Zona_Restaurant;
-    return CIN;
+    in>>R.Zona_Restaurant;
+    return in;
 }
 
 int operator>(Rezervare& masa, const string& ora_limita){ //operatorul supraincarcat >
