@@ -30,15 +30,6 @@ Mihnea
 Parter
 Dominic
 
-1
-20.03.2024
-19:30
-20.03.2024
-20:00
-5
-Demisol
-Alexandru
-
 2
 25.03.2024
 Dascalu
@@ -84,6 +75,15 @@ Da
 Da
 3
 Nu
+
+1
+20.03.2024
+19:30
+20.03.2024
+20:00
+5
+Demisol
+Alexandru
 
 4
 3
