@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
-#include "Rezervare.h"
+#include "example.h"
 
-TEST(SuiteName, Initial) {
-    EXPECT_EQ(1, 1);
-    //Tester initial
+TEST(SuiteName, NumeTest) {
+    doSomething();
+    EXPECT_EQ(10, 10);
 }
