@@ -411,8 +411,8 @@ void Restaurant:: prindeExceptie() {
     try {
         aruncaExceptie();
     } catch(const RestaurantException& e) {
-        std::cerr << "A aparut o exceptie: " << e.what() << std::endl;
+        std::cout << "A aparut o exceptie: " << e.what() << std::endl;
     } catch(const std::exception& e) {
-        std::cerr << "O alta exceptie a aparut: " << e.what() << std::endl;
+        std::cout << "O alta exceptie a aparut: " << e.what() << std::endl;
     }
 }
