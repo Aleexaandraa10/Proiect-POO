@@ -22,7 +22,7 @@ Restaurant::Restaurant() {
     Detalii_Rezervari.emplace_back(new RezervareOnline(4,"22:00","16.04.2024","Terasa","Paun","101YT3")); count++;
     Detalii_Rezervari.emplace_back(new RezervareOnline(2,"18:00","27.04.2024","Parter","Nicusor","102")); count++;
     Detalii_Rezervari.emplace_back(new RezervareOnline(2,"23:30","15.04.2024","Demisol","Capitanu","103")); count++;
-    Detalii_Rezervari.emplace_back(new RezervareOnline(6,"20:30","16.04.2024","Demisol","Popescu","104M")); count++;
+    Detalii_Rezervari.emplace_back(new RezervareOnline(6,"21:30","17.04.2024","Demisol","Popescu","104M")); count++;
 
     Detalii_Rezervari.emplace_back(new RezervareOnline(2,"23:30","15.04.2024","Demisol","Ciprian","103w")); count++;
     Detalii_Rezervari.emplace_back(new RezervareOnline(6,"20:30","16.04.2024","Demisol","Ciprian","1043")); count++;
@@ -52,7 +52,7 @@ Restaurant::~Restaurant(){
     for (auto& rezervare : Detalii_Rezervari) {
         delete rezervare;
     }
-};
+}
 
 void Restaurant::Creare_Rezervare() {
     std::string data, ora, zona_client, nume, datarez;
@@ -328,65 +328,67 @@ void Restaurant::Anuleaza_Rezervare() const {
         std::cout << "In acest moment aveti " << ct_rezervari
                   << " rezervari facute la restaurantul nostru. Cate doriti sa anulati?\n";
         std::cin >> ct_rezervari;
-        std::cout
-                << "In regula! Introduceti in aceasta ordine va rog data si ora la care a fost facuta fiecare rezervare\n";
-        for (int i = 1; i <= ct_rezervari; i++) {
-            if (i > 1)
-                std::cout << "Introduceti urmatoarea data si ora\n";
-            std::cin >> data >> ora;
-            for (Rezervare *rezervare: Detalii_Rezervari) {
-                if (auto *rezervareOnline = dynamic_cast<RezervareOnline *>(rezervare)) {
-                    if (rezervareOnline->GetData() == data && rezervareOnline->GetOra() == ora &&
-                        rezervareOnline->GetNumeRezervare() == nume) {
-                        std::cout << "Am gasit rezervarea, observam ca a fost facuta online, avand urmatorul id: "
-                                  << rezervareOnline->GetId();
-                        std::cout << "\nCelelalte detalii ale rezervarii sunt:\n";
-                        std::cout << "Zona restaurant-> "<<rezervareOnline->GetZonaRestaurant() << std::endl;
-                        std::cout << "Numar persoane-> "<<rezervareOnline->GetNrPersoane() << std::endl;
-                        std::cout << "Sunteti sigur ca doriti sa o anulati?\n";
-                        std::cout << "Da\nNu\n";
-                        std::cin >> raspuns;
-                        if (raspuns == "Da") {
-                            std::cout << "Anularea rezervarii de pe data " << data << " de la ora " << ora
-                                      << " a fost realizata cu succes!\n";
-                        }
-                    }
-                }
-                if (auto *rezervareTelefonica = dynamic_cast<RezervareTelefonica *>(rezervare)) {
-                    if (rezervareTelefonica->GetData() == data && rezervareTelefonica->GetOra() == ora &&
-                        rezervareTelefonica->GetNumeRezervare() == nume) {
-                        std::cout
-                                << "Am gasit rezervarea, observam ca a fost facuta telefonic, pe urmatorul nr de telefon: "
-                                << rezervareTelefonica->GetTelefon();
-                        std::cout << "\nCelelalte detalii ale rezervarii sunt:\n";
-                        std::cout << "Zona restaurant-> "<<rezervareTelefonica->GetZonaRestaurant() << std::endl;
-                        std::cout << "Numar persoane-> "<<rezervareTelefonica->GetNrPersoane() << std::endl;
-                        std::cout << "Sunteti sigur ca doriti sa o anulati?\n";
-                        std::cout << "Da\nNu\n";
-                        std::cin >> raspuns;
-                        if (raspuns == "Da") {
-                            std::cout << "Anularea rezervarii de pe data " << data << " de la ora " << ora
-                                      << " a fost realizata cu succes!\n";
-                        } else {
-                            std::cout
-                                    << "Pentru rezervarile viitoare numarul de telefon mai este valabil?\nDa\nNu\n";
+        if(ct_rezervari) {
+            std::cout
+                    << "In regula! Introduceti in aceasta ordine va rog data si ora la care a fost facuta fiecare rezervare\n";
+            for (int i = 1; i <= ct_rezervari; i++) {
+                if (i > 1)
+                    std::cout << "Introduceti urmatoarea data si ora\n";
+                std::cin >> data >> ora;
+                for (Rezervare *rezervare: Detalii_Rezervari) {
+                    if (auto *rezervareOnline = dynamic_cast<RezervareOnline *>(rezervare)) {
+                        if (rezervareOnline->GetData() == data && rezervareOnline->GetOra() == ora &&
+                            rezervareOnline->GetNumeRezervare() == nume) {
+                            std::cout << "Am gasit rezervarea, observam ca a fost facuta online, avand urmatorul id: "
+                                      << rezervareOnline->GetId();
+                            std::cout << "\nCelelalte detalii ale rezervarii sunt:\n";
+                            std::cout << "Zona restaurant-> " << rezervareOnline->GetZonaRestaurant() << std::endl;
+                            std::cout << "Numar persoane-> " << rezervareOnline->GetNrPersoane() << std::endl;
+                            std::cout << "Sunteti sigur ca doriti sa o anulati?\n";
+                            std::cout << "Da\nNu\n";
                             std::cin >> raspuns;
                             if (raspuns == "Da") {
-                                std::cout << "In regula!\n";
+                                std::cout << "Anularea rezervarii de pe data " << data << " de la ora " << ora
+                                          << " a fost realizata cu succes!\n";
+                            }
+                        }
+                    }
+                    if (auto *rezervareTelefonica = dynamic_cast<RezervareTelefonica *>(rezervare)) {
+                        if (rezervareTelefonica->GetData() == data && rezervareTelefonica->GetOra() == ora &&
+                            rezervareTelefonica->GetNumeRezervare() == nume) {
+                            std::cout
+                                    << "Am gasit rezervarea, observam ca a fost facuta telefonic, pe urmatorul nr de telefon: "
+                                    << rezervareTelefonica->GetTelefon();
+                            std::cout << "\nCelelalte detalii ale rezervarii sunt:\n";
+                            std::cout << "Zona restaurant-> " << rezervareTelefonica->GetZonaRestaurant() << std::endl;
+                            std::cout << "Numar persoane-> " << rezervareTelefonica->GetNrPersoane() << std::endl;
+                            std::cout << "Sunteti sigur ca doriti sa o anulati?\n";
+                            std::cout << "Da\nNu\n";
+                            std::cin >> raspuns;
+                            if (raspuns == "Da") {
+                                std::cout << "Anularea rezervarii de pe data " << data << " de la ora " << ora
+                                          << " a fost realizata cu succes!\n";
                             } else {
                                 std::cout
-                                        << "Introduceti un nou numar de telefon pentru a-l actualiza in baza noastra de date:\n";
-                                std::cin >> telefon;
-                                bool ok = false;
-                                while (!ok) {
-                                    try {
-                                        rezervareTelefonica->Schimba_NumarTelefon(telefon);
-                                        ok = true;
-                                    } catch (const std::invalid_argument &e) {
-                                        std::cout << "Eroare: " << e.what() << std::endl;
-                                        std::cout
-                                                << "Introduceti din nou numarul de telefon, asigurandu-va ca are exact 10 cifre:\n";
-                                        std::cin >> telefon;
+                                        << "Pentru rezervarile viitoare numarul de telefon mai este valabil?\nDa\nNu\n";
+                                std::cin >> raspuns;
+                                if (raspuns == "Da") {
+                                    std::cout << "In regula!\n";
+                                } else {
+                                    std::cout
+                                            << "Introduceti un nou numar de telefon pentru a-l actualiza in baza noastra de date:\n";
+                                    std::cin >> telefon;
+                                    bool ok = false;
+                                    while (!ok) {
+                                        try {
+                                            rezervareTelefonica->Schimba_NumarTelefon(telefon);
+                                            ok = true;
+                                        } catch (const std::invalid_argument &e) {
+                                            std::cout << "Eroare: " << e.what() << std::endl;
+                                            std::cout
+                                                    << "Introduceti din nou numarul de telefon, asigurandu-va ca are exact 10 cifre:\n";
+                                            std::cin >> telefon;
+                                        }
                                     }
                                 }
                             }
