@@ -59,11 +59,11 @@ int main() {
          {
              RezervareOnline rezervareOnline(4, "19:00", "15.04.2024", "Parter", "Andrei","101A");
              Rezervare* rezervareptr=&rezervareOnline;
-             rezervareptr->ValidareIdRezervare();  //va prelua functia ValidareIdRezervare() din clasa derivata Rezervare
+             rezervareptr->ValidareIdRezervare();
 
              Rezervare* rptr=&rezervareOnline;
              auto *onlineptr=dynamic_cast<RezervareOnline*>(rptr);
-             onlineptr->ValidareIdRezervare(); //va prelua functia ValidareIdRezervare() din clasa derivata Rezervare
+             onlineptr->ValidareIdRezervare();
 
          }
          if(raspuns==8)
