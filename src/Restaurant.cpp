@@ -48,6 +48,12 @@ Restaurant::Restaurant() {
     Detalii_Preparate.emplace_back("Cookies & Cream Milkshake","Desert",220,26);
 }
 
+Restaurant::~Restaurant(){
+    for (auto& rezervare : Detalii_Rezervari) {
+        delete rezervare;
+    }
+};
+
 void Restaurant::Creare_Rezervare() {
     std::string data, ora, zona_client, nume, datarez;
     int nr_pers, pozitie=0;
