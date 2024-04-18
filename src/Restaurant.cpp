@@ -307,7 +307,7 @@ void Restaurant::Numara_Rezervari(const std::string& ora) const {
 
 void Restaurant::Anuleaza_Rezervare() const {
     std::string nume, data, ora, raspuns, telefon;
-    int ct_rezervari = 0, ct_client;
+    int ct_rezervari = 0;
     std::cout << "Buna ziua, introduceti va rog numele pe care ati facut rezervarea\n";
     std::cin >> nume;
     for (auto *rezervare: Detalii_Rezervari) {
@@ -321,10 +321,10 @@ void Restaurant::Anuleaza_Rezervare() const {
     } else {
         std::cout << "In acest moment aveti " << ct_rezervari
                   << " rezervari facute la restaurantul nostru. Cate doriti sa anulati?\n";
-        std::cin >> ct_client;
+        std::cin >> ct_rezervari;
         std::cout
                 << "In regula! Introduceti in aceasta ordine va rog data si ora la care a fost facuta fiecare rezervare\n";
-        for (int i = 1; i <= ct_client; i++) {
+        for (int i = 1; i <= ct_rezervari; i++) {
             if (i > 1)
                 std::cout << "Introduceti urmatoarea data si ora\n";
             std::cin >> data >> ora;
