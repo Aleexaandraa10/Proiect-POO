@@ -18,6 +18,7 @@ private:
 
 public:
     Restaurant();
+    ~Restaurant();
     void Creare_Rezervare();
     void Modificare_Detalii_Rezervare();
     void OreDisponibile();
