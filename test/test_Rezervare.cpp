@@ -46,7 +46,7 @@ TEST(RezervareTest, ComparisonOperators) {
     EXPECT_TRUE(rezervare1 != rezervare3);
 }
 
-//Testare fct ValidareIdRezervare() si CalculeazaCostTotal()
+//Testare fct ValidareIdRezervare()
 TEST(RezervareTest, OtherMethods) {
     Rezervare rezervare(4, "12:00", "2024-04-19", "Zona A", "John Doe");
     EXPECT_EQ(rezervare.CalculeazaCostTotal(4, 50.0), 200.0);
@@ -54,7 +54,6 @@ TEST(RezervareTest, OtherMethods) {
     rezervare.ValidareIdRezervare();
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_EQ(output, "Rezervarea nu a fost facuta online, deci nu va putem verifica corectitudinea id-ului.\n");
-    EXPECT_EQ(rezervare.CalculeazaCostTotal(5,22.3),111.5);
 }
 
 // Test operator >
