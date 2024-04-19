@@ -17,8 +17,6 @@ public:
     explicit Rezervare(int nr_persoane = 0, std::string ora = "", std::string data = "",
                        std::string zona_restaurant = "", std::string nume_rezervare = "");
 
-    Rezervare(int nr_persoane, std::string ora, std::string data, std::string nume_rezervare);
-
     Rezervare(const Rezervare& masa);
 
     Rezervare& operator=(Rezervare const& masa);
@@ -31,7 +29,7 @@ public:
 
     friend std::istream& operator>>(std::istream& in, Rezervare& rezervare);
 
-    int operator==(const Rezervare& masa) const;
+    bool operator==(const Rezervare& masa) const;
 
     std::string GetData();
 
