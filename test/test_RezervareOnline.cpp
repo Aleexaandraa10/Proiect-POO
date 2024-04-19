@@ -24,6 +24,21 @@ TEST(RezervareOnlineTest, OperatorEqual) {
 }
 
 // Test afisare
+//TEST(RezervareOnlineTest, Afisare) {
+//    RezervareOnline rezervare(4, "12:00", "05.05.2023", "Etaj", "Bianca", "AB12345678");
+//    testing::internal::CaptureStdout();
+//    rezervare.afisare(std::cout);
+//    std::string output = testing::internal::GetCapturedStdout();
+//
+//    std::string expected_output = "Numele pe care a fost facuta rezervarea este: Bianca\n";
+//    expected_output += "Nr de persoane care participa este: 4\n";
+//    expected_output += "Ora la care masa a fost rezervata este: 12:00\n";
+//    expected_output += "Data rezervarii este: 05.05.2023\n";
+//    expected_output += "Zona restaurantului aleasa este: Etaj\n";
+//    expected_output += "Iar: AB12345678 este id-ul rezervarii\n";
+//
+//    EXPECT_EQ(output, expected_output);
+//}
 TEST(RezervareOnlineTest, Afisare) {
     RezervareOnline rezervare(4, "12:00", "05.05.2023", "Etaj", "Bianca", "AB12345678");
     testing::internal::CaptureStdout();
@@ -74,4 +89,3 @@ TEST(RezervareOnlineTest, OperatorAtribuire) {
     EXPECT_EQ(rezervare2.GetNumeRezervare(), rezervare1.GetNumeRezervare());
     EXPECT_EQ(rezervare2.GetId(), rezervare1.GetId());
 }
-
