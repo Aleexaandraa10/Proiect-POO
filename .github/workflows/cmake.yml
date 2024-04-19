@@ -263,7 +263,7 @@ jobs:
 
       - name: Test
         # Run tests
-        run: cd "${BUILD_DIR}" && ctest
+        run: cd "${BUILD_DIR}" && ctest --output-on-failure
 
       - name: Install
         # Use CMake to "install" build artifacts (only interested in CMake registered targets) to our custom artifacts directory
