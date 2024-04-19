@@ -5,10 +5,6 @@ Rezervare::Rezervare(int nr_persoane, std::string ora, std::string data, std::st
         Nr_Persoane(nr_persoane), Ora(std::move(ora)), Data(std::move(data)), Zona_Restaurant(std::move(zona_restaurant)),
         Nume_Rezervare(std::move(nume_rezervare)) {}
 
-Rezervare::Rezervare(int nr_persoane, std::string ora, std::string data, std::string nume_rezervare) :
-        Nr_Persoane(nr_persoane), Ora(std::move(ora)), Data(std::move(data)), Zona_Restaurant("Parter"),
-        Nume_Rezervare(std::move(nume_rezervare)) {}
-
 Rezervare::Rezervare(const Rezervare& masa) :
         Nr_Persoane(masa.Nr_Persoane), Ora(masa.Ora), Data(masa.Data), Zona_Restaurant(masa.Zona_Restaurant),
         Nume_Rezervare(masa.Nume_Rezervare) {}
@@ -69,11 +65,11 @@ std::istream& operator>>(std::istream& in, Rezervare& rezervare) {
     return in;
 }
 
-int Rezervare::operator==(const Rezervare& masa) const {
+bool Rezervare::operator==(const Rezervare& masa) const {
     if (masa.Data == Data and Ora == masa.Ora)
-        return 1;
+        return true;
     else
-        return 0;
+        return false;
 }
 
 std::string Rezervare::GetData() {
