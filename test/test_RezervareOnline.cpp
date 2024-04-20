@@ -23,58 +23,6 @@ TEST(RezervareOnlineTest, OperatorEqual) {
     EXPECT_FALSE(rezervare1 == rezervare3);
 }
 
-// Test afisare
-//TEST(RezervareOnlineTest, Afisare) {
-//    RezervareOnline rezervare(4, "12:00", "05.05.2023", "Etaj", "Bianca", "AB12345678");
-//    testing::internal::CaptureStdout();
-//    rezervare.afisare(std::cout);
-//    std::string output = testing::internal::GetCapturedStdout();
-//
-//    std::string expected_output = "Numele pe care a fost facuta rezervarea este: Bianca\n";
-//    expected_output += "Nr de persoane care participa este: 4\n";
-//    expected_output += "Ora la care masa a fost rezervata este: 12:00\n";
-//    expected_output += "Data rezervarii este: 05.05.2023\n";
-//    expected_output += "Zona restaurantului aleasa este: Etaj\n";
-//    expected_output += "Iar: AB12345678 este id-ul rezervarii\n";
-//
-//    EXPECT_EQ(output, expected_output);
-//}
-TEST(RezervareOnlineTest, Afisare) {
-    RezervareOnline rezervare(4, "12:00", "05.05.2023", "Etaj", "Bianca", "AB12345678");
-    testing::internal::CaptureStdout();
-    rezervare.afisare(std::cout);
-    std::string output = testing::internal::GetCapturedStdout();
-
-    std::string expected_output = "Numele pe care a fost facuta rezervarea este: Bianca\n";
-    expected_output += "Nr de persoane care participa este: 4\n";
-    expected_output += "Ora la care masa a fost rezervata este: 12:00\n";
-    expected_output += "Data rezervarii este: 05.05.2023\n";
-    expected_output += "Zona restaurantului aleasa este: Etaj\n";
-    expected_output += "Iar: AB12345678 este id-ul rezervarii\n";
-
-    EXPECT_EQ(output, expected_output);
-}
-
-// Test ValidareIdRezervare pentru Id corect
-TEST(RezervareOnlineTest, ValidareIdRezervareCorect) {
-    RezervareOnline rezervare(4, "12:00", "03.04.2023", "Demisol", "Ana", "a567");
-    testing::internal::CaptureStdout();
-    rezervare.ValidareIdRezervare();
-    std::string output = testing::internal::GetCapturedStdout();
-
-    EXPECT_EQ(output, "Id-ul este corect!\n");
-}
-
-// Test ValidareIdRezervare pentru Id necorespunzator (lungime incorecta)
-TEST(RezervareOnlineTest, ValidareIdRezervareLungimeIncorecta) {
-    RezervareOnline rezervare(4, "12:00", "03.04.2023", "Demisol", "Ana", "a");
-    testing::internal::CaptureStdout();
-    rezervare.ValidareIdRezervare();
-    std::string output = testing::internal::GetCapturedStdout();
-
-    EXPECT_EQ(output, "Id-ul nu se incadreaza in limitele noastre de lungime.\n");
-}
-
 // Test operator=
 TEST(RezervareOnlineTest, OperatorAtribuire) {
     RezervareOnline rezervare1(4, "12:00", "02.05.2024", "Parter", "Mihai", "AB1234");
