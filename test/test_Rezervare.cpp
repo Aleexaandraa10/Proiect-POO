@@ -1,8 +1,8 @@
 #include "gtest/gtest.h"
 #include "Rezervare.h"
 
-//Testare toate Getterele
-TEST(RezervareSuiteName, ConstructorWithAllParameters){
+//Testare Getters
+TEST(RezervareTest, ConstructorWithAllParameters){
     Rezervare rezervare_simpla(5,"23:30","25.04.2024","Terasa","Alexia");
     EXPECT_EQ(rezervare_simpla.GetNumeRezervare(),"Alexia");
     EXPECT_EQ(rezervare_simpla.GetNrPersoane(),5);
@@ -48,8 +48,8 @@ TEST(RezervareTest, ComparisonOperators) {
 
 // Test operator >
 TEST(RezervareTest, OperatorGreaterThan) {
-    Rezervare rezervare1(2, "14:00", "2024-04-20", "Demisol","Marcel");
-    Rezervare rezervare2(2, "15:00", "2024-04-20", "Terasa","Marinel");
+    Rezervare rezervare1(2, "14:00", "20.04.2024", "Demisol","Marcel");
+    Rezervare rezervare2(2, "15:00", "20.04.2024", "Terasa","Marinel");
 
     EXPECT_TRUE(rezervare2 > "20:00");
     EXPECT_TRUE(rezervare1 > "14:01");
