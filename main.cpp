@@ -17,7 +17,7 @@ int main() {
          cout<<"3. Verifica disponibilitate ore dintr-o anumita zi."<<endl;
          cout<<"4. Recomandarile bucatarului."<<endl;
          cout<<"5. Vizualizare numar de rezervari la momentul actual. (Downcast+Folosire atribut static)"<<endl;
-         cout<<"6. Anulare rezervare online/telefonica. (Citire si afisarea a n obiecte + ilustrare exceptii)\n";
+         cout<<"6. Anulare rezervare online/telefonica. (Citire si afisarea a n obiecte + downcast + ilustrare exceptii)\n";
          cout<<"7. Verifica daca id-ul rezervarii tale online a fost introdus corect de catre colegii nostrii! (Upcasting+Downcasting)\n";
          cout<<"8. Nota ta de plata depaseste 200 de lei? Noi va oferim o reducere (Folosire functie statica)\n";
          cout<<"9. Optiune valabila doar pentru departamentul de IT! (Ilustrare upcast intr-un bloc catch)\n";
@@ -70,7 +70,7 @@ int main() {
          {
              int persoane;
              double pret;
-             cout<<"Introduceti va rog nr. de persoana si aproximativ pretul per persoana:\n";
+             cout<<"Introduceti va rog numarul de persoane si aproximativ pretul per persoana:\n";
              cin>>persoane>>pret;
              double costTotal = Rezervare::CalculeazaCostTotal(persoane, pret);
              if(costTotal>=200){
