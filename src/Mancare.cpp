@@ -1,8 +1,7 @@
 #include "Mancare.h"
-#include <iostream>
 #include<string>
 #include <utility>
-#include<vector>
+
 
 Mancare::Mancare(std::string nume, std::string categorie, int gramaj, int pret)
         : Nume_Preparat(std::move(nume)), Categorie_Preparat(std::move(categorie)), Gramaj(gramaj), Pret(pret) {}
