@@ -2,7 +2,7 @@
 #define REZERVARE_ONLINE_H
 
 #include "Rezervare.h"
-#include <cctype>
+
 
 class RezervareOnline : public Rezervare {
 private:
@@ -13,7 +13,7 @@ public:
                              const std::string& zona_restaurant = "", const std::string& nume_rezervare = "",
                              const std::string& id = "");
 
-    std::string GetId() const;
+    [[nodiscard]] std::string GetId() const;
     RezervareOnline& operator=(const RezervareOnline& online);
     bool operator==(const RezervareOnline& rezervare) const;
     ~RezervareOnline() override;
