@@ -16,10 +16,10 @@ private:
 public:
     Mancare(std::string nume, std::string categorie, int gramaj, int pret);
 
-    std::string GetNume() const;
-    std::string GetCategorie() const;
-    int GetGramaj() const;
-    int GetPret() const;
+    [[nodiscard]] std::string GetNume() const;
+    [[nodiscard]] std::string GetCategorie() const;
+    [[nodiscard]] int GetGramaj() const;
+    [[nodiscard]] int GetPret() const;
 };
 
 #endif // MANCARE_H
