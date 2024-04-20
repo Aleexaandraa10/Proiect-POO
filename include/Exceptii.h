@@ -5,7 +5,7 @@
 
 class RestaurantException : public std::exception {
 public:
-    [[nodiscard]] virtual const char* what() const noexcept override = 0;
+    [[nodiscard]] const char* what() const noexcept override = 0;
 };
 
 class DataInvalidaException : public RestaurantException {
