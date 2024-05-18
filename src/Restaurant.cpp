@@ -3,6 +3,7 @@
 #include<map>
 #include<typeinfo>
 
+
 Restaurant::Restaurant() {
     Detalii_Rezervari.emplace_back( new Rezervare(3,"18:30","18.03.2024","Terasa","Alexis") );
     Detalii_Rezervari.emplace_back(new Rezervare(10,"19:30","20.03.2024","Terasa","Andone"));
@@ -60,7 +61,7 @@ void Restaurant::Medie_Evaluari() const {
     int start = std::max(0, Rezervare::count - 10);
     for(int i = Rezervare::count - 1; i >= start; --i) {
         // Verificăm dacă indicele este valid și elementul nu este nullptr
-        if (i < Detalii_Rezervari.size() && Detalii_Rezervari[i] != nullptr) {
+        if (i < int(Detalii_Rezervari.size()) && Detalii_Rezervari[i] != nullptr) {
             // Calculăm note random pentru evaluări
             Evaluare<int>* evaluareMancare = new EvaluareMancare<int>(i % 7 + 4);
             Evaluare<int>* evaluareAtmosfera = new EvaluareAtmosfera<int>(i % 9 + 2);
