@@ -10,10 +10,10 @@ private:
     std::string Data;
     std::string Zona_Restaurant;
     std::string Nume_Rezervare;
-protected:
-    virtual void afisare(std::ostream& out) const;
-    virtual void citire(std::istream& in);
+
 public:
+    static int count;
+
     explicit Rezervare(int nr_persoane = 0, std::string ora = "", std::string data = "",
                        std::string zona_restaurant = "", std::string nume_rezervare = "");
 
@@ -24,6 +24,10 @@ public:
     virtual ~Rezervare();
 
     friend int operator>(Rezervare& masa, const std::string& ora_limita);
+
+    virtual void afisare(std::ostream& out) const;
+
+    virtual void citire(std::istream& in);
 
     friend std::ostream& operator<<(std::ostream& out, const Rezervare& rezervare);
 
