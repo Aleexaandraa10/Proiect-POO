@@ -56,25 +56,21 @@ Restaurant::Restaurant() {
 void Restaurant::Medie_Evaluari() const {
     std::map<std::string, std::list<Evaluare<int>*>> evaluariMap;
 
-    int start = std::max(0, Rezervare::count - 10);  // Ajustăm indicele de început pentru a nu depăși limitele
+    // Determinăm limita inferioară a buclei pentru a evita accesul la indecși negativi
+    int start = std::max(0, Rezervare::count - 10);
     for(int i = Rezervare::count - 1; i >= start; --i) {
-        // Calculăm note random pentru evaluări
-        Evaluare<int>* evaluareMancare = new EvaluareMancare<int>(i % 7 + 4);
-        Evaluare<int>* evaluareAtmosfera = new EvaluareAtmosfera<int>(i % 9 + 2);
-        Evaluare<int>* evaluareServire = new EvaluareServire<int>(i % 8 + 3);
+        // Verificăm dacă indicele este valid și elementul nu este nullptr
+        if (i < Detalii_Rezervari.size() && Detalii_Rezervari[i] != nullptr) {
+            // Calculăm note random pentru evaluări
+            Evaluare<int>* evaluareMancare = new EvaluareMancare<int>(i % 7 + 4);
+            Evaluare<int>* evaluareAtmosfera = new EvaluareAtmosfera<int>(i % 9 + 2);
+            Evaluare<int>* evaluareServire = new EvaluareServire<int>(i % 8 + 3);
 
-        // Verificăm dacă Detalii_Rezervari[i] nu este null
-        if (Detalii_Rezervari[i] != nullptr) {
             std::string numeRezervare = Detalii_Rezervari[i]->GetNumeRezervare();
 
             evaluariMap[numeRezervare].push_back(evaluareMancare);
             evaluariMap[numeRezervare].push_back(evaluareAtmosfera);
             evaluariMap[numeRezervare].push_back(evaluareServire);
-        } else {
-            // Curățăm memoria în caz de eroare pentru a evita memory leak
-            delete evaluareMancare;
-            delete evaluareAtmosfera;
-            delete evaluareServire;
         }
     }
 
@@ -87,6 +83,7 @@ void Restaurant::Medie_Evaluari() const {
         std::cout << "Acesta a avut o experienta de nota " << suma / 3 << " la restaurantul nostru.\n" << std::endl;
     }
 
+    // Curățăm memoria pentru a evita memory leaks
     for (auto& pair : evaluariMap) {
         for (auto evaluare : pair.second) {
             delete evaluare;
