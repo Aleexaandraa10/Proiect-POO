@@ -1,6 +1,4 @@
 #include "Meniu.h"
-#include "Restaurant.h"
-#include "Burger.h"
 
 #include<iostream>
 
