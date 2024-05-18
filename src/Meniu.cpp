@@ -1,11 +1,17 @@
 #include "Meniu.h"
+#include "Restaurant.h"
+#include "Burger.h"
 
 #include<iostream>
 
 using namespace std;
 
-Meniu& Meniu::get_meniu(){
-     static Meniu menu;
+Meniu& Meniu:: get_meniu() {
+    static Meniu menu;
+    return menu;
+}
+
+void Meniu::ControlPanel(){
 
      Restaurant restaurant;
      int continua=1, raspuns;
@@ -22,9 +28,9 @@ Meniu& Meniu::get_meniu(){
          cout<<"7. Verifica daca id-ul rezervarii tale online a fost introdus corect de catre colegii nostrii! (Upcasting+Downcasting)\n";
          cout<<"8. Nota ta de plata depaseste 200 de lei? Noi va oferim o reducere (Folosire functie statica)\n";
          cout<<"9. Optiune valabila doar pentru departamentul de IT! (Ilustrare upcast intr-un bloc catch + functionalitate RezervareAbonament)\n";
-         cout<<"10. Vrei sa ne evaluezi? Acum este sansa ta! (ierarhii clase template, RTTI, list, fct lambda-->sort)\n";
-         cout<<"11. Afla care este parerea celorlalti clienti! Aici poti vedea media evaluarilor a ultimelor 10 rezervari facute. (folosire map + clase template)\n";
-         cout <<"12. NOU!! Creeaza-ti propriul burger! (utilizare design pattern builder)\n" ;
+         cout<<"10. Vrei sa ne evaluezi? Acum este sansa ta! (Ierarhii clase template, RTTI, list, fct lambda-->sort)\n";
+         cout<<"11. Afla care este parerea celorlalti clienti! Aici poti vedea media evaluarilor a ultimelor 10 rezervari facute. (Folosire map + Clase template)\n";
+         cout <<"12. NOU!! Creeaza-ti propriul burger! (Utilizare design pattern builder)\n" ;
          cout<<"13. Am vizualizat ce mi-am dorit.\n";
          cin>>raspuns;
          if(raspuns==1)
@@ -144,5 +150,4 @@ Meniu& Meniu::get_meniu(){
              continua=0;
          }
      }
-     return menu;
 }
