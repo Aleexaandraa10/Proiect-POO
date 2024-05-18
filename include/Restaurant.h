@@ -4,7 +4,18 @@
 #include <iostream>
 #include <vector>
 #include <stdexcept>
-#include "Meniu.h"
+
+#include "Rezervare.h"
+#include "RezervareOnline.h"
+#include "RezervareTelefonica.h"
+#include "RezervareAbonament.h"
+#include "Mancare.h"
+#include "Exceptii.h"
+
+#include "Evaluare.h"
+#include "EvaluareMancare.h"
+#include "EvaluareAtmosfera.h"
+#include "EvaluareServire.h"
 
 class Restaurant {
 private:
