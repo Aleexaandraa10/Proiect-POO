@@ -1,6 +1,9 @@
 #ifndef MENIU_H
 #define MENIU_H
 
+#include "Restaurant.h"
+#include "Burger.h"
+
 class Meniu{
 private:
     Meniu() = default;
