@@ -53,19 +53,29 @@ Restaurant::Restaurant() {
     Detalii_Preparate.emplace_back("Cookies & Cream Milkshake","Desert",220,26);
 }
 
-void Restaurant::Medie_Evaluari() const{
+void Restaurant::Medie_Evaluari() const {
     std::map<std::string, std::list<Evaluare<int>*>> evaluariMap;
-    for(int i = Rezervare::count-1; i >= Rezervare::count - 10; --i) {
-        //am calculat niste note a.i sa fie random alegerea lor
+
+    int start = std::max(0, Rezervare::count - 10);  // Ajustăm indicele de început pentru a nu depăși limitele
+    for(int i = Rezervare::count - 1; i >= start; --i) {
+        // Calculăm note random pentru evaluări
         Evaluare<int>* evaluareMancare = new EvaluareMancare<int>(i % 7 + 4);
         Evaluare<int>* evaluareAtmosfera = new EvaluareAtmosfera<int>(i % 9 + 2);
         Evaluare<int>* evaluareServire = new EvaluareServire<int>(i % 8 + 3);
 
-        std::string numeRezervare = Detalii_Rezervari[i]->GetNumeRezervare();
+        // Verificăm dacă Detalii_Rezervari[i] nu este null
+        if (Detalii_Rezervari[i] != nullptr) {
+            std::string numeRezervare = Detalii_Rezervari[i]->GetNumeRezervare();
 
-        evaluariMap[numeRezervare].push_back(evaluareMancare);
-        evaluariMap[numeRezervare].push_back(evaluareAtmosfera);
-        evaluariMap[numeRezervare].push_back(evaluareServire);
+            evaluariMap[numeRezervare].push_back(evaluareMancare);
+            evaluariMap[numeRezervare].push_back(evaluareAtmosfera);
+            evaluariMap[numeRezervare].push_back(evaluareServire);
+        } else {
+            // Curățăm memoria în caz de eroare pentru a evita memory leak
+            delete evaluareMancare;
+            delete evaluareAtmosfera;
+            delete evaluareServire;
+        }
     }
 
     for (const auto& pair : evaluariMap) {
@@ -74,7 +84,7 @@ void Restaurant::Medie_Evaluari() const{
         for (const auto& evaluare : pair.second) {
             suma += evaluare->getRating();
         }
-        std::cout << "Acesta a avut o experienta de nota " << suma/3 << " la restaurantul nostru.\n" << std::endl;
+        std::cout << "Acesta a avut o experienta de nota " << suma / 3 << " la restaurantul nostru.\n" << std::endl;
     }
 
     for (auto& pair : evaluariMap) {
@@ -83,6 +93,7 @@ void Restaurant::Medie_Evaluari() const{
         }
     }
 }
+
 
 void Restaurant::Evaluare_Clienti(std::string& nume, std::string& data){
     int poz=0, nota1, nota2, nota3;
