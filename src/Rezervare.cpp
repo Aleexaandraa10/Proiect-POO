@@ -1,11 +1,9 @@
 #include "Rezervare.h"
 
-int Rezervare::count = 0;
-
 Rezervare::Rezervare(int nr_persoane, std::string ora, std::string data, std::string zona_restaurant,
                      std::string nume_rezervare) :
         Nr_Persoane(nr_persoane), Ora(std::move(ora)), Data(std::move(data)), Zona_Restaurant(std::move(zona_restaurant)),
-        Nume_Rezervare(std::move(nume_rezervare)) {count++;}
+        Nume_Rezervare(std::move(nume_rezervare)) {}
 
 Rezervare::Rezervare(const Rezervare& masa) :
         Nr_Persoane(masa.Nr_Persoane), Ora(masa.Ora), Data(masa.Data), Zona_Restaurant(masa.Zona_Restaurant),
