@@ -21,6 +21,7 @@ class Restaurant {
 private:
     std::vector<Rezervare*> Detalii_Rezervari;
     std::vector<Mancare> Detalii_Preparate;
+    static int count;
 
 public:
     Restaurant();
