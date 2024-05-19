@@ -12,8 +12,6 @@ private:
     std::string Nume_Rezervare;
 
 public:
-    static int count;
-
     explicit Rezervare(int nr_persoane = 0, std::string ora = "", std::string data = "",
                        std::string zona_restaurant = "", std::string nume_rezervare = "");
 
