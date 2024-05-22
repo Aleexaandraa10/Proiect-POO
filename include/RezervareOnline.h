@@ -11,10 +11,12 @@ private:
 public:
     explicit RezervareOnline(int nr_persoane = 0, const std::string& ora = "", const std::string& data = "",
                              const std::string& zona_restaurant = "", const std::string& nume_rezervare = "",
-                             const std::string& id = "");
+                             std::string  id = "");
 
     [[nodiscard]] std::string GetId() const;
     RezervareOnline& operator=(const RezervareOnline& online);
+    RezervareOnline( const RezervareOnline& ro);
+
     bool operator==(const RezervareOnline& rezervare) const;
     ~RezervareOnline() override;
 
