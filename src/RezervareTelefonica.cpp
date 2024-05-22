@@ -1,9 +1,11 @@
 #include "RezervareTelefonica.h"
 
+#include <utility>
+
 RezervareTelefonica::RezervareTelefonica(int nr_persoane, const std::string& ora, const std::string& data,
                                          const std::string& zona_restaurant, const std::string& nume_rezervare,
-                                         const std::string& numar) :
-        Rezervare(nr_persoane, ora, data, zona_restaurant, nume_rezervare), NumarTelefon(numar) {}
+                                         std::string  numar) :
+        Rezervare(nr_persoane, ora, data, zona_restaurant, nume_rezervare), NumarTelefon(std::move(numar)) {}
 
 std::string RezervareTelefonica::GetTelefon() const {
     return NumarTelefon;
@@ -15,6 +17,7 @@ RezervareTelefonica& RezervareTelefonica::operator=(const RezervareTelefonica& t
     return *this;
 }
 
+RezervareTelefonica::RezervareTelefonica(const RezervareTelefonica& rt): Rezervare(rt), NumarTelefon(rt.NumarTelefon){}
 bool RezervareTelefonica::operator==(const RezervareTelefonica& rezervare) const {
     return (Rezervare::operator==(rezervare) && NumarTelefon == rezervare.NumarTelefon);
 }
@@ -35,6 +38,8 @@ void RezervareTelefonica::citire(std::istream& in) {
 void RezervareTelefonica::Schimba_NumarTelefon(const std::string& noulNumar) {
     if (noulNumar.size() != 10) {
         throw std::invalid_argument("Numarul de telefon este invalid");
+        //aruncă o excepție de tipul std::invalid_argument atunci când noul
+        // număr de telefon nu are exact 10 caractere.
     }
     if (noulNumar != NumarTelefon) {
         std::cout << "Schimbarea numarului de telefon pentru rezervarea dvs se poate efectua!\n";
