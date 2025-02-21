@@ -1,7 +1,11 @@
 #include "Restaurant.h"
+#include<list>
+#include<map>
+#include<typeinfo>
+
 
 Restaurant::Restaurant() {
-    Detalii_Rezervari.emplace_back(new Rezervare(3,"18:30","18.03.2024","Terasa","Alexis")); count++;
+    Detalii_Rezervari.emplace_back( new Rezervare(3,"18:30","18.03.2024","Terasa","Alexis") ); count++;
     Detalii_Rezervari.emplace_back(new Rezervare(10,"19:30","20.03.2024","Terasa","Andone")); count++;
     Detalii_Rezervari.emplace_back(new Rezervare(2,"20:00","23.03.2024","Etaj","Banica")); count++;
     Detalii_Rezervari.emplace_back(new Rezervare(3,"20:00","23.03.2024","Etaj","Bogza")); count++;
@@ -18,24 +22,26 @@ Restaurant::Restaurant() {
     Detalii_Rezervari.emplace_back(new Rezervare(7,"22:30","14.03.2024","Parter","Lazar")); count++;
     Detalii_Rezervari.emplace_back(new Rezervare(7,"23:00","21.03.2024","Parter","Lungu")); count++;
 
+    Detalii_Rezervari.emplace_back(new RezervareTelefonica(5,"20:30","16.04.2024","Terasa","Cretu","0755018978")); count++;
+
     Detalii_Rezervari.emplace_back(new RezervareOnline(7,"20:00","23.04.2024","Demisol","Lungu","100")); count++;
     Detalii_Rezervari.emplace_back(new RezervareOnline(4,"22:00","16.04.2024","Terasa","Paun","101YT3")); count++;
     Detalii_Rezervari.emplace_back(new RezervareOnline(2,"18:00","27.04.2024","Parter","Nicusor","102")); count++;
     Detalii_Rezervari.emplace_back(new RezervareOnline(2,"23:30","15.04.2024","Demisol","Capitanu","103")); count++;
     Detalii_Rezervari.emplace_back(new RezervareOnline(6,"21:30","17.04.2024","Demisol","Popescu","104M")); count++;
 
-    Detalii_Rezervari.emplace_back(new RezervareOnline(2,"23:30","15.04.2024","Demisol","Ciprian","103w")); count++;
-    Detalii_Rezervari.emplace_back(new RezervareOnline(6,"20:30","16.04.2024","Demisol","Ciprian","1043")); count++;
+    Detalii_Rezervari.emplace_back(new RezervareTelefonica(7,"19:00","15.04.2024","Demisol","Cretu","0755018978")); count++;
 
-    Detalii_Rezervari.emplace_back(new RezervareTelefonica(6,"20:30","20.04.2024","Etaj","Ciprian","0775434098")); count++;
+    Detalii_Rezervari.emplace_back(new RezervareOnline(2,"23:30","15.04.2024","Demisol","Ciprian","103w")); count++;
+    Detalii_Rezervari.emplace_back(new RezervareOnline(6,"20:30","16.04.2024","Demisol","Adrian","1043")); count++;
+
+    Detalii_Rezervari.emplace_back(new RezervareTelefonica(6,"20:30","20.04.2024","Etaj","Bodan","0775434098")); count++;
     Detalii_Rezervari.emplace_back(new RezervareTelefonica(5,"20:00","28.04.2024","Etaj","Lungu","0775232042")); count++;
     Detalii_Rezervari.emplace_back(new RezervareTelefonica(10,"20:30","16.04.2024","Terasa","Nicoleta","0755019878")); count++;
     Detalii_Rezervari.emplace_back(new RezervareTelefonica(7,"19:00","15.04.2024","Demisol","Andrei","0773890454")); count++;
     Detalii_Rezervari.emplace_back(new RezervareTelefonica(3,"19:00","20.04.2024","Terasa","Dan","0770200779")); count++;
 
-    Detalii_Rezervari.emplace_back(new RezervareTelefonica(5,"20:30","16.04.2024","Terasa","Cretu","0755018978")); count++;
-    Detalii_Rezervari.emplace_back(new RezervareTelefonica(7,"19:00","15.04.2024","Demisol","Cretu","0755018978")); count++;
-    Detalii_Rezervari.emplace_back(new RezervareTelefonica(3,"23:30","20.04.2024","Terasa","Cretu","0755018978")); count++;
+    Detalii_Rezervari.emplace_back(new RezervareTelefonica(3,"23:30","20.04.2024","Terasa","Paul","0755018978")); count++;
 
     Detalii_Preparate.emplace_back("Classic Nachos","Fara carne",600,59);
     Detalii_Preparate.emplace_back("Classic Nachos","Fara carne",600,59);
@@ -46,6 +52,89 @@ Restaurant::Restaurant() {
     Detalii_Preparate.emplace_back("Homemade Apple Cobbler","Desert",380,39);
     Detalii_Preparate.emplace_back("Craft Ice Cream","Desert",90,24);
     Detalii_Preparate.emplace_back("Cookies & Cream Milkshake","Desert",220,26);
+}
+
+int Restaurant::count = 0;
+
+void Restaurant::Medie_Evaluari() const{
+    std::map<std::string, std::list<Evaluare<int>*>> evaluariMap;
+    for(int i = count-1; i >= count - 10; --i) {
+        //am calculat niste note a.i sa fie random alegerea lor
+        Evaluare<int>* evaluareMancare = new EvaluareMancare<int>(i % 7 + 4);
+        Evaluare<int>* evaluareAtmosfera = new EvaluareAtmosfera<int>(i % 9 + 2);
+        Evaluare<int>* evaluareServire = new EvaluareServire<int>(i % 8 + 3);
+
+        std::string numeRezervare = Detalii_Rezervari[i]->GetNumeRezervare();
+
+        evaluariMap[numeRezervare].push_back(evaluareMancare);
+        evaluariMap[numeRezervare].push_back(evaluareAtmosfera);
+        evaluariMap[numeRezervare].push_back(evaluareServire);
+    }
+
+    for (const auto& pair : evaluariMap) {
+        std::cout << "Rezervarea a fost a urmatorului client: " << pair.first << std::endl;
+        int suma = 0;
+        for (const auto& evaluare : pair.second) {
+            suma += evaluare->getRating();
+        }
+        std::cout << "Acesta a avut o experienta de nota " << suma/3 << " la restaurantul nostru.\n" << std::endl;
+    }
+
+    for (auto& pair : evaluariMap) {
+        for (auto evaluare : pair.second) {
+            delete evaluare;
+        }
+    }
+}
+
+void Restaurant::Evaluare_Clienti(std::string& nume, std::string& data){
+    int poz=0, nota1, nota2, nota3;
+    bool finish = true;
+    while(finish) {
+        for (int i = 0; i < count; i++) {
+            if (nume == Detalii_Rezervari[i]->GetNumeRezervare() && data == Detalii_Rezervari[i]->GetData()) {
+                poz = i;
+                finish = false;
+                break;
+            }
+        }
+        if (!poz) {
+            std::cout << "Numele sau data introduse de dvs au fost incorecte, va rugam reintroduceti:" << std::endl;
+            std::cin >> nume >> data;
+        }
+    }
+
+    std::cout << "Din baza noastra de date reies aceste informatii despre rezervarea dvs:\n\n" << *Detalii_Rezervari[poz];
+    std::cout << "\n--------------------------------------------------\n";
+    std::cout << "Pe o scara de la 1 la 10 ce nota ai da servirii? 1 inseamna slaba, 10 inseamna foarte buna:\n";
+    std::cin >> nota1;
+    Evaluare<int>* evaluareServire = new EvaluareServire<int>(nota1);
+
+    std::cout <<"Pe o scara de la 1 la 10 cat de mult ti-a placut mancarea?" << std::endl;
+    std::cin >> nota2;
+    Evaluare<int>* evaluareMancare = new EvaluareMancare<int>(nota2);
+    std::cout << "Pe o scara de la 1 la 10 cat de mult ti-a placut atmosfera? Aici vrem sa stim daca a fost suficienta liniste pentru tine, daca ti-a placut muzica noastra etc\n";
+    std:: cin >>nota3;
+    Evaluare<int>* evaluareAtmosfera = new EvaluareAtmosfera<int>(nota3);
+
+    std::list<Evaluare<int>*>evaluari = {evaluareServire, evaluareMancare, evaluareAtmosfera};
+
+    std::cout << "Acestea sunt notele date de dvs in ordinea crescatoare a rating-ului oferit:\n";
+    std::cout << "Nu va speriati, primul cuvant, cel care incepe cu 2 cifre este pentru departamentul nostru IT, puteti sa nu-l bagati in seama :) \n";
+
+    evaluari.sort([](Evaluare<int>* a, Evaluare<int>* b){
+        return a->getRating() <= b->getRating();
+    });
+
+    for(const auto& evaluare: evaluari){
+        std::cout << typeid(*evaluare).name() <<std::endl;
+        evaluare->info();
+        std::cout << std::endl;
+    }
+
+    for(auto evaluare: evaluari){
+        delete evaluare;
+    }
 }
 
 Restaurant::~Restaurant(){
@@ -96,7 +185,7 @@ void Restaurant::Creare_Rezervare() {
             std::cin >> nume;
             Detalii_Rezervari.emplace_back(new Rezervare(nr_pers, ora, data, zona_client, nume));
             std::cout << "Multumim, rezervarea a fost facuta, aici puteti vedea detaliile ei:\n" << std::endl;
-            std::cout << Detalii_Rezervari[Detalii_Rezervari.size() - 1];
+            std::cout << *Detalii_Rezervari.back();
             finish=false;
             std::cout<<"\nVa asteptam! ";
         }
@@ -129,7 +218,7 @@ void Restaurant::Modificare_Detalii_Rezervare() {
             std::cin >> data_noua;
             Detalii_Rezervari[pozitie_nume]->SetData(data_noua);
             std::cout << std::endl << "Asa arata rezervarea dvs modificata in acest moment:\n\n";
-            std::cout << Detalii_Rezervari[pozitie_nume];
+            std::cout << *Detalii_Rezervari[pozitie_nume];
         }
         if (optiune == 2) {
             std::string ora_noua;
@@ -137,7 +226,7 @@ void Restaurant::Modificare_Detalii_Rezervare() {
             std::cin >> ora_noua;
             Detalii_Rezervari[pozitie_nume]->SetOra(ora_noua);
             std::cout << std::endl << "Asa arata rezervarea dvs modificata in acest moment:\n\n";
-            std::cout << Detalii_Rezervari[pozitie_nume];
+            std::cout << *Detalii_Rezervari[pozitie_nume];
         }
         if (optiune == 3) {
             int nr_persoane_nou;
@@ -145,7 +234,7 @@ void Restaurant::Modificare_Detalii_Rezervare() {
             std::cin >> nr_persoane_nou;
             Detalii_Rezervari[pozitie_nume]->SetNrPersoane(nr_persoane_nou);
             std::cout << std::endl << "Asa arata rezervarea dvs modificata in acest moment:\n\n";
-            std::cout << Detalii_Rezervari[pozitie_nume];
+            std::cout << *Detalii_Rezervari[pozitie_nume];
         }
         std::cout << std::endl << "Mai doriti sa modificati ceva la rezervarea dvs? Va rog raspundeti cu <<Da>> sau <<Nu>>\n";
         std::cin >> raspuns;
@@ -161,7 +250,7 @@ void Restaurant::Modificare_Detalii_Rezervare() {
     std::cout << "Multumim, rezervarea voastra a fost modificata cu succes! Va asteptam! ";
 }
 
-void Restaurant::OreDisponibile() {
+void Restaurant::OreDisponibile() const{
     std::string data_client, raspuns;
     std::vector<std::string> ore_disponibile;
     std::vector<std::string> ore_folosite;
@@ -218,7 +307,7 @@ void Restaurant::OreDisponibile() {
     std::cout << "Multumim, va asteptam la restaurantul nostru! ";
 }
 
-void Restaurant::Recomandari_Culinare() {
+void Restaurant::Recomandari_Culinare() const{
     int optiune = 0;
     std::string raspuns;
     std::cout << "Ce doriti sa mancati?\n";
@@ -305,8 +394,8 @@ void Restaurant::Numara_Rezervari(const std::string& ora) const {
             ct++;
         }
     }
-    std::cout << "Totalul nostru de rezervari facute la acest moment este: " << Detalii_Rezervari.size() << std::endl;
-    std::cout << ct << " rezervari sunt facute personal dupa intervalul orar 20:00.\n";
+    std::cout << "Totalul nostru de rezervari facute la acest moment este: " << count<< std::endl;
+    std::cout << ct << " rezervari sunt facute personal dupa intervalul orar " << ora << std::endl;
     std::cout << "Dintre rezervarile noastre online, " << ct_online << " sunt dupa intervalul orar " << ora << std::endl;
     std::cout << "Dintre rezervarile noastre telefonice, " << ct_telefonic << " sunt dupa intervalul orar " << ora << std::endl;
 }
@@ -409,8 +498,6 @@ void Restaurant::Anuleaza_Rezervare() const {
     }
     std::cout<<"Va mai asteptam la noi!\n";
 }
-
-int Restaurant::count = 0;
 
 void Restaurant:: aruncaExceptie() {
     throw DataInvalidaException();

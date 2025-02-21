@@ -2,6 +2,7 @@
 
 int main() {
 
-     auto& x = Meniu::get_meniu();
+     Meniu &meniu = Meniu::get_meniu();
+     meniu.ControlPanel();
      return 0;
 }
