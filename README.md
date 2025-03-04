@@ -1,71 +1,69 @@
-# Proiect - Gestionarea Rezervărilor la Restaurant
+# **Restaurant Reservation Management - C++ Project**  
 
-## Descrierea Proiectului
-Acest proiect este o **aplicație interactivă** dezvoltată în **C++**, care simulează un sistem complex de gestionare a rezervărilor într-un restaurant. Am utilizat concepte avansate de **Programare Orientată pe Obiecte (POO)** pentru a structura eficient aplicația și pentru a optimiza gestionarea rezervărilor, interacțiunea cu utilizatorul și funcționalitățile restaurantului.
+This project is an **interactive application** developed in **C++**, simulating a **complex restaurant reservation system**.  
+Advanced **Object-Oriented Programming (OOP)** concepts have been implemented to efficiently structure the application, optimize reservation management, user interaction, and restaurant functionalities.  
 
-## Funcționalități Implementate
-- **Crearea, modificarea și anularea rezervărilor** (online și telefonice)  
-- **Verificarea disponibilității meselor** și numărarea rezervărilor active  
-- **Sistem de recomandări culinare** bazate pe preferințele utilizatorului  
-- **Calcul automat al costului mesei** cu reduceri dinamice  
-- **Sistem de evaluare a experienței clienților**, folosind **template-uri și STL**  
-- **Crearea unui burger personalizat** cu **design pattern Builder**  
-- **Tratarea excepțiilor și validarea datelor** (ex. identificarea rezervărilor incorecte)  
-- **Utilizarea unor structuri eficiente din STL** (`vector`, `list`, `map`) pentru gestionarea rezervărilor  
+## **Implemented Features**  
+- **Create, modify, and cancel reservations** (both online and phone-based)  
+- **Check table availability** and count active reservations  
+- **Personalized food recommendations** based on user preferences  
+- **Automatic meal cost calculation** with dynamic discounts  
+- **Customer experience rating system** using **templates and STL**  
+- **Custom burger creation** using the **Builder design pattern**  
+- **Exception handling and data validation** (e.g., detecting incorrect reservations)  
+- **Efficient data structures from STL** (`vector`, `list`, `map`) for managing reservations  
 
-## Arhitectura Proiectului
-Proiectul este structurat pe mai multe clase, fiecare având un rol bine definit:
+## **Project Architecture**  
+The project is structured into multiple classes, each with a well-defined role:  
 
-### Clase principale:
-- `Meniu` - Gestionarea interactivă a restaurantului
-- `Restaurant` - Administrarea rezervărilor și interacțiunea cu utilizatorii
-- `Rezervare` (bază) - Definirea rezervărilor, cu derivări pentru `RezervareOnline` și `RezervareTelefonica`
-- `BurgerBuilder` - Permite personalizarea unui burger prin **design pattern Builder**
-- `Mancare` - Definirea meniului cu preparate specifice
+### **Main Classes:**  
+- `Menu` - Manages interactive restaurant operations  
+- `Restaurant` - Handles reservations and user interaction  
+- `Reservation` (base) - Defines reservations, with derived classes `OnlineReservation` and `PhoneReservation`  
+- `BurgerBuilder` - Enables custom burger creation via **Builder pattern**  
+- `Food` - Defines the menu with specific dishes  
 
-### Clasa principală (`main.cpp`)
-- Inițializează aplicația și gestionează fluxul de execuție
-- Permite utilizatorului să navigheze prin opțiunile meniului
-- Apelează metodele relevante pentru gestionarea rezervărilor
+### **Main Program (`main.cpp`)**  
+- Initializes the application and manages the execution flow  
+- Allows users to navigate through the menu options  
+- Calls relevant methods for reservation management  
 
-## Concepte POO Utilizate
-- **Clase și obiecte** - Organizarea logică a aplicației  
-- **Constructori și destructor** - Gestionarea resurselor  
-- **Moștenire și polimorfism** - Extinderea funcționalităților rezervărilor  
-- **Upcasting & Downcasting** - Conversii între tipurile de rezervare  
-- **Operatori supraîncărcați** - `operator>>`, `operator<<`, `operator=`  
-- **Funcții și atribute statice** - Centralizarea informațiilor despre rezervări  
-- **Tratarea excepțiilor** - Validare ID-uri, gestionarea erorilor (`std::exception`)  
-- **Clasa Singleton** - Gestionarea meniului ca o instanță unică  
+## **OOP Concepts Used**  
+- **Classes and Objects** - Logical structuring of the application  
+- **Constructors and Destructors** - Resource management  
+- **Inheritance and Polymorphism** - Extending reservation functionalities  
+- **Upcasting & Downcasting** - Converting between reservation types  
+- **Overloaded Operators** - `operator>>`, `operator<<`, `operator=`  
+- **Static Functions and Attributes** - Centralizing reservation data  
+- **Exception Handling** - Validating IDs, handling errors (`std::exception`)  
+- **Singleton Pattern** - Ensuring a unique instance of the menu  
 - **Design Patterns:**  
-  - **Builder** - Crearea unui burger personalizat
-  - **Observer** - Actualizarea disponibilității meselor
-  - **Factory** - Gestionarea tipurilor de rezervări  
-- **STL - vector, list, map** - Gestionarea eficientă a rezervărilor și evaluărilor  
+  - **Builder** - Custom burger creation  
+  - **Observer** - Table availability updates  
+  - **Factory** - Managing reservation types  
+- **STL (`vector`, `list`, `map`)** - Efficient reservation and review management  
 
-## Fluxul aplicației
-Meniul aplicației oferă **13 opțiuni**, fiecare ilustrând un **concept POO**:
+## **Application Flow**  
+The menu provides **13 options**, each demonstrating an **OOP concept**:  
 
-1. Creare rezervare  
-2. Modificare rezervare  
-3. Verificare disponibilitate  
-4. Recomandări culinare  
-5. Număr rezervări active (**Downcasting & atribut static**)  
-6. Anulare rezervare (**Excepții & citire `n` obiecte**)  
-7. Validare ID rezervare (**Upcasting & Downcasting**)  
-8. Reducere automată la nota de plată (**Funcție statică**)  
-9. Funcționalități avansate pentru angajați (**Polimorfism**)  
-10. Evaluarea restaurantului (**Template-uri, RTTI, list, lambda**)  
-11. Media evaluărilor clienților (**STL - map + clase template**)  
-12. Creare burger personalizat (**Builder Pattern**)  
-13. Ieșire din aplicație  
+1. Create a reservation  
+2. Modify a reservation  
+3. Check table availability  
+4. Food recommendations  
+5. Count active reservations (**Downcasting & static attributes**)  
+6. Cancel a reservation (**Exceptions & reading `n` objects**)  
+7. Validate reservation ID (**Upcasting & Downcasting**)  
+8. Automatic discount on the bill (**Static function**)  
+9. Advanced functionalities for employees (**Polymorphism**)  
+10. Restaurant rating (**Templates, RTTI, `list`, lambda**)  
+11. Average customer ratings (**STL - `map` + template classes**)  
+12. Custom burger creation (**Builder Pattern**)  
+13. Exit the application  
 
-## Posibile Îmbunătățiri
-- **Integrare cu o bază de date** pentru stocarea rezervărilor și evaluărilor clienților  
-- **Interfață grafică (GUI)** pentru o experiență mai prietenoasă  
-- **Extinderea meniului** cu noi opțiuni și funcționalități  
+## **Potential Improvements**  
+- **Database integration** to store reservations and customer reviews  
+- **Graphical User Interface (GUI)** for a more user-friendly experience  
+- **Expanded menu** with additional options and functionalities  
 
-## Concluzie
-Acest proiect demonstrează **competențe solide în C++ și Programare Orientată pe Obiecte**, utilizând atât **concepte avansate de arhitectură software**, cât și **un sistem interactiv și intuitiv** pentru utilizatori.
-
-
+## **Conclusion**  
+This project showcases **strong skills in C++ and Object-Oriented Programming**, implementing **advanced software architecture concepts** in an **interactive and user-friendly system**.
